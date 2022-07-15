@@ -1,0 +1,570 @@
+.promo {
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 204px 176px 0 180px;
+}
+
+.promo__box {
+  height: 680px;
+  position: relative;
+}
+
+.promo__joe-block {
+  max-width: 578px;
+  position: relative;
+}
+
+.promo__joe-image-block {
+  width: 314px;
+  height: 411px;
+  position: relative;
+}
+
+.promo__joe-back {
+  width: 186px;
+  height: 319px;
+  background: #ffdbcc;
+  border-radius: 50%;
+  position: absolute;
+  left: 11px;
+  bottom: 0;
+  z-index: -1;
+}
+
+.promo__joe-image {
+  width: 225px;
+  height: 287px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.promo__name {
+  font-family: 'KyivType Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 120%;
+  color: #121212;
+  position: absolute;
+  top: 0;
+  margin: 0;
+}
+
+.promo__name_type_joe {
+  left: 155px;
+}
+
+.promo__joe-arrow {
+  width: 93px;
+  height: 80px;
+  position: absolute;
+  left: 58px;
+  top: 37px;
+}
+
+.promo__joe-text-block {
+  max-width: 333px;
+  position: absolute;
+  left: 245px;
+  top: 92px;
+}
+
+.promo__joe-color-block {
+  height: 26px;
+  background: #ffdbcc;
+  border-radius: 4px;
+  position: absolute;
+  z-index: -1;
+}
+
+.promo__joe-color-block_type_top {
+  width: 154px;
+  left: 35px;
+  top: 2px;
+}
+
+.promo__joe-color-block_type_bottom {
+  width: 136px;
+  left: 104px;
+  top: 34px;
+}
+
+.promo__heading {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 140%;
+  color: #1b1b1e;
+  margin: 0;
+}
+
+.promo__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: #1b1b1e;
+  margin: 0;
+  padding-top: 24px;
+}
+
+.promo__mary-block {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.promo__mary-text-block {
+  max-width: 268px;
+  position: relative;
+  padding: 56px 22px 0 0;
+}
+
+.promo__curve {
+  width: 209px;
+  height: 125px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -2;
+}
+
+.promo__mary-color-block {
+  width: 185px;
+  height: 26px;
+  background: #e1e0ff;
+  border-radius: 4px;
+  position: absolute;
+  left: 57px;
+  top: 63px;
+  z-index: -1;
+}
+
+.promo__text_type_bold {
+  font-weight: 700;
+}
+
+.promo__mary-image-block {
+  width: 393px;
+  height: 372px;
+  position: relative;
+}
+
+.promo__mary-back {
+  width: 246px;
+  height: 288px;
+  background: #e1e0ff;
+  border-radius: 50%;
+  position: absolute;
+  left: 97px;
+  bottom: 0;
+  z-index: -1;
+}
+
+.promo__mary-image {
+  width: 346px;
+  height: 216px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.promo__name_type_mary {
+  left: 0;
+}
+
+.promo__mary-arrow {
+  width: 65px;
+  height: 111px;
+  position: absolute;
+  left: 52px;
+  top: 52px;
+}
+
+.promo__link-block {
+  max-width: 934px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 35px;
+}
+
+.promo__link-image-block {
+  width: 500px;
+  height: 380px;
+  position: relative;
+}
+
+.promo__link-back {
+  width: 500px;
+  height: 256px;
+  background: #ffd7ed;
+  border-radius: 50%;
+  position: absolute;
+  left: 0px;
+  top: 44px;
+  z-index: -1;
+}
+
+.promo__link-image {
+  width: 283px;
+  height: 380px;
+  position: absolute;
+  left: 108px;
+  top: 0px;
+}
+
+.promo__link-text-block {
+  max-width: 388px;
+  padding-left: 45px;
+}
+
+.promo__link-heading {
+  font-family: 'KyivType Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 120%;
+  color: #121212;
+  margin: 0;
+}
+
+.promo__text_type_semibold {
+  font-weight: 500;
+}
+
+.promo__link-button {
+  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
+  background-color: #a2a3fd;
+  border-radius: 100px;
+  text-decoration: none;
+  margin-top: 20px;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.promo__link-button:hover {
+  background-color: #8788df;
+}
+
+.promo__link-button:active {
+  background: #c0c1ff;
+}
+
+@media (max-width: 1280px) {
+  .promo {
+    padding: 152px 64px 0 52px;
+  }
+
+  .promo__box {
+    height: 586px;
+  }
+
+  .promo__joe-block {
+    max-width: 555px;
+  }
+
+  .promo__joe-image-block {
+    width: 270px;
+    height: 325px;
+  }
+
+  .promo__joe-back {
+    width: 148px;
+    height: 252px;
+    left: 8px;
+  }
+
+  .promo__joe-image {
+    width: 178px;
+    height: 226px;
+  }
+
+  .promo__name {
+    font-size: 36px;
+  }
+
+  .promo__name_type_joe {
+    left: 123px;
+  }
+
+  .promo__joe-arrow {
+    width: 72px;
+    height: 60px;
+    left: 46px;
+    top: 30px;
+  }
+
+  .promo__joe-text-block {
+    left: 222px;
+    top: 100px;
+  }
+
+  .promo__mary-image-block {
+    width: 328px;
+    height: 300px;
+  }
+
+  .promo__mary-back {
+    width: 200px;
+    height: 234px;
+    left: 78px;
+  }
+
+  .promo__mary-image {
+    width: 280px;
+    height: 175px;
+    right: 10px;
+  }
+
+  .promo__mary-arrow {
+    width: 50px;
+    height: 94px;
+    left: 42px;
+    top: 42px;
+  }
+
+  .promo__link-block {
+    max-width: 766px;
+    padding-top: 60px;
+  }
+
+  .promo__link-image-block {
+    width: 388px;
+    height: 292px;
+  }
+
+  .promo__link-back {
+    width: 384px;
+    height: 196px;
+    top: 34px;
+  }
+
+  .promo__link-image {
+    width: 217px;
+    height: 292px;
+    left: 83px;
+  }
+
+  .promo__link-text-block {
+    max-width: 333px;
+  }
+
+  .promo__link-heading {
+    font-size: 36px;
+  }
+
+  .promo__link-button {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .promo {
+    width: calc(100% - 12px * 2);
+    padding: 115px 0 0;
+    margin: 0 auto;
+  }
+
+  .promo__box {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .promo__joe-block {
+    max-width: 700px;
+    display: flex;
+  }
+
+  .promo__joe-image-block {
+    width: 226px;
+    height: 398px;
+  }
+
+  .promo__joe-back {
+    width: 186px;
+    height: 319px;
+    left: 11px;
+  }
+
+  .promo__joe-image {
+    width: 225px;
+    height: 287px;
+  }
+
+  .promo__name {
+    font-size: 28px;
+  }
+
+  .promo__name_type_joe {
+    left: 102px;
+  }
+
+  .promo__joe-arrow {
+    width: 91px;
+    height: 76px;
+    left: 4px;
+    top: 18px;
+  }
+
+  .promo__joe-text-block {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 100px 0 0 44px;
+  }
+
+  .promo__mary-block {
+    position: relative;
+    align-self: end;
+    padding-top: 30px;
+  }
+
+  .promo__mary-image-block {
+    width: 296px;
+    height: 312px;
+  }
+
+  .promo__mary-back {
+    width: 210px;
+    height: 253px;
+    left: 43px;
+  }
+
+  .promo__mary-image {
+    width: 296px;
+    height: 190px;
+    right: 0;
+  }
+
+  .promo__name_type_mary {
+    left: 50px;
+  }
+
+  .promo__mary-arrow {
+    width: 65px;
+    height: 116px;
+    left: 8px;
+  }
+
+  .promo__link-image-block {
+    width: 296px;
+    height: 247px;
+  }
+
+  .promo__link-back {
+    width: 287px;
+    height: 166px;
+    top: 28px;
+  }
+
+  .promo__link-image {
+    width: 184px;
+    height: 247px;
+    left: 59px;
+  }
+
+  .promo__link-text-block {
+    width: 55%;
+  }
+
+  .promo__link-heading {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 610px) {
+  .promo__joe-block {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .promo__joe-text-block {
+    margin: 24px 0 0;
+  }
+
+  .promo__joe-color-block_type_top {
+    width: 140px;
+    left: 46px;
+  }
+
+  .promo__joe-color-block_type_bottom {
+    width: 120px;
+    left: 44px;
+    top: 28px;
+  }
+
+  .promo__heading {
+    font-size: 20px;
+  }
+
+  .promo__text {
+    padding-top: 12px;
+  }
+
+  .promo__mary-block {
+    grid-template-columns: auto;
+    grid-template-areas:
+      "image"
+      "text";
+    align-self: center;
+    text-align: center;
+    padding-top: 132px;
+  }
+
+  .promo__mary-image-block {
+    grid-area: image;
+  }
+
+  .promo__mary-text-block {
+    grid-area: text;
+    max-width: 333px;
+    margin-top: 24px;
+    padding: 0;
+  }
+
+  .promo__curve {
+    display: none;
+  }
+
+  .promo__mary-color-block {
+    width: 167px;
+    left: 52px;
+    top: 2px;
+  }
+
+  .promo__link-block {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 132px;
+  }
+
+  .promo__link-text-block {
+    width: 100%;
+    padding: 24px 0 0;
+  }
+
+  .promo__link-button {
+    margin: 40px auto 0;
+  }
+}

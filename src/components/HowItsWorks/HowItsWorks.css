@@ -1,0 +1,20 @@
+.how-works {
+    max-width: 1440px;
+    padding-top: 105px;
+    margin: 0 auto;
+}
+.logo {
+    padding: 0 112px;
+}
+
+@media (max-width: 760px) {
+    .how-works {
+        padding-top: 60px;
+    }
+    .logo {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+
+    }
+  }

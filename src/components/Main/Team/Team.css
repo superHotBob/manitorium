@@ -1,0 +1,131 @@
+.team {
+  background: #a2a3fd;
+  margin: 125px auto 0;
+  padding: 124px 185px;
+  position: relative;
+  z-index: -2;
+}
+
+.team__title {
+  font-family: 'KyivType Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 120%;
+  text-align: center;
+  color: #ffffff;
+  margin: 0;
+}
+
+.team__list {
+  max-width: 1070px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min-content, max-content));
+  justify-content: space-between;
+  gap: 80px;
+  list-style: none;
+  margin: 0 auto;
+  padding: 52px 0 0;
+}
+
+.team__item {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.team__item:hover {
+  transform: scale(1.1);
+}
+
+.team__photo-box {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.team__photo-back {
+  width: 180px;
+  height: 180px;
+  background: #e1e0ff;
+  border-radius: 50%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+}
+
+.team__photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-position: center;
+  object-fit: contain;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.team__text-box {
+  padding-left: 20px;
+}
+
+.team__name {
+  font-family: 'KyivType Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  color: #ffffff;
+  margin: 0;
+}
+
+.team__career {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  color: #ffffff;
+  margin: 0;
+  padding-top: 4px;
+}
+
+.team__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  color: #ffffff;
+  margin: 0;
+  padding-top: 32px;
+}
+
+@media (max-width: 1280px) {
+  .team {
+    text-align: center;
+    margin: 140px auto 0;
+    padding: 108px 165px;
+  }
+
+  .team__item {
+    flex-direction: column;
+  }
+
+  .team__text-box {
+    padding: 20px 0 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .team {
+    padding: 44px 12px;
+  }
+
+  .team__list {
+    grid-template-columns: 1fr;
+  }
+
+  .team__text {
+    padding-top: 24px;
+  }
+}

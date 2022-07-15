@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'KyivType Sans';
+    src: url('KyivTypeSans-Medium2.eot');
+    src: url('KyivTypeSans-Medium2.eot?#iefix') format('embedded-opentype'),
+        url('KyivTypeSans-Medium2.woff2') format('woff2'),
+        url('KyivTypeSans-Medium2.woff') format('woff'),
+        url('KyivTypeSans-Medium2.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'KyivType Sans';
+    src: url('KyivTypeSans-Bold2.eot');
+    src: url('KyivTypeSans-Bold2.eot?#iefix') format('embedded-opentype'),
+        url('KyivTypeSans-Bold2.woff2') format('woff2'),
+        url('KyivTypeSans-Bold2.woff') format('woff'),
+        url('KyivTypeSans-Bold2.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url('Jost-Bold.eot');
+    src: url('Jost-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Bold.woff2') format('woff2'),
+        url('Jost-Bold.woff') format('woff'),
+        url('Jost-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url('Jost-Regular.eot');
+    src: url('Jost-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Regular.woff2') format('woff2'),
+        url('Jost-Regular.woff') format('woff'),
+        url('Jost-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url('Jost-SemiBold.eot');
+    src: url('Jost-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Jost-SemiBold.woff2') format('woff2'),
+        url('Jost-SemiBold.woff') format('woff'),
+        url('Jost-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jost';
+    src: url('Jost-Medium.eot');
+    src: url('Jost-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Medium.woff2') format('woff2'),
+        url('Jost-Medium.woff') format('woff'),
+        url('Jost-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+

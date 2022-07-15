@@ -1,0 +1,18 @@
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.message {
+  position: absolute;
+  top: 300px;
+  width:530px;
+  z-index: 100;
+  border-radius: 30px;
+  padding: 20px;
+  left: calc(50vw - 250px);
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 7px 4px 40px rgba(0, 0, 0, 0.04);
+  font: 600 25px/40px 'Jost', sans-serif;
+}

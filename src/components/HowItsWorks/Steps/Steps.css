@@ -1,0 +1,267 @@
+.steps {
+  padding-top: 114px;
+  position: relative;
+}
+
+.steps__title {
+  font-family: "KyivType Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 120%;
+  text-align: center;
+  color: #a2a3fd;
+  margin: 0;
+}
+
+.steps__cards {
+  display: grid;
+  gap: 32px;
+  padding-top: 60px;
+}
+
+.steps__box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  padding: 0 76px;
+}
+
+.steps__box_type_violet {
+  background: #a2a3fd;
+  padding: 60px 76px;
+}
+
+.steps__card {
+  min-height: 354px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.steps__card-image {
+  width: 204px;
+  height: 312px;
+  padding-left: 40px;
+}
+
+.steps__card-image_type_info {
+  width: 194px;
+  height: 314px;
+}
+
+.steps__card-image_type_price {
+  width: 180px;
+  height: 306px;
+}
+
+.steps__card-image_type_trend {
+  width: 210px;
+  height: 320px;
+}
+
+.steps__card-image_type_grow {
+  width: 200px;
+  height: 316px;
+}
+
+.steps__card-image_type_control {
+  width: 213px;
+  height: 322px;
+}
+
+.steps__text-block {
+  max-width: 328px;
+  padding-left: 40px;
+}
+
+.steps__step-number {
+  font-family: "KyivType Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  color: #a2a3fd;
+  margin: 0;
+}
+
+.steps__step-number_type_white {
+  color: #ffffff;
+}
+
+.steps__card-title {
+  font-family: "KyivType Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 120%;
+  color: #1b1b1e;
+  margin: 0;
+  padding-top: 28px;
+}
+
+.steps__card-text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: #1b1b1e;
+  margin: 0;
+  padding-top: 8px;
+}
+
+.steps__card-text-semibold {
+  font-weight: 600;
+}
+
+@media (max-width: 1280px) {
+  .steps__title {
+    font-size: 28px;
+  }
+
+  .steps__box_type_violet {
+    padding: 30px 76px;
+  }
+
+  .steps__card {
+    min-height: 248px;
+  }
+
+  .steps__card-image {
+    width: 122px;
+    height: 184px;
+    padding-left: 8px;
+  }
+
+  .steps__card-image_type_info {
+    width: 118px;
+    height: 190px;
+  }
+
+  .steps__card-image_type_price {
+    width: 106px;
+    height: 180px;
+  }
+
+  .steps__card-image_type_trend {
+    width: 126px;
+    height: 192px;
+  }
+
+  .steps__card-image_type_grow {
+    width: 114px;
+    height: 180px;
+  }
+
+  .steps__card-image_type_control {
+    width: 140px;
+    height: 206px;
+  }
+
+  .steps__text-block {
+    max-width: 350px;
+    padding-left: 20px;
+  }
+
+  .steps__card-title {
+    font-size: 22px;
+  }
+
+  .steps__card-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 820px) {
+  .steps {
+    padding-top: 132px;
+  }
+
+  .steps__cards {
+    gap: 24px;
+  }
+
+  .steps__box {
+    grid-template-columns: auto;
+    gap: 40px;
+    padding: 0 12px;
+  }
+
+  .steps__box_type_violet {
+    padding: 30px 12px;
+  }
+
+  .steps__card {
+    min-height: 354px;
+    justify-content: space-evenly;
+  }
+
+  .steps__card-image {
+    width: 204px;
+    height: 312px;
+    padding-left: 60px;
+  }
+
+  .steps__card-image_type_info {
+    width: 194px;
+    height: 314px;
+  }
+
+  .steps__card-image_type_price {
+    width: 180px;
+    height: 306px;
+  }
+
+  .steps__card-image_type_trend {
+    width: 210px;
+    height: 320px;
+  }
+
+  .steps__card-image_type_grow {
+    width: 200px;
+    height: 316px;
+  }
+
+  .steps__card-image_type_control {
+    width: 213px;
+    height: 322px;
+  }
+
+  .steps__card-title {
+    font-size: 24px;
+  }
+
+  .steps__card-text {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .steps__title {
+    width: 56%;
+    font-size: 24px;
+    margin: 0 auto;
+  }
+
+  .steps__box_type_violet {
+    padding: 16px 12px;
+  }
+
+  .steps__card {
+    min-height: 592px;
+    flex-direction: column;
+  }
+
+  .steps__card-image {
+    padding: 18px 0 24px;
+  }
+
+  .steps__text-block {
+    text-align: center;
+    padding: 20px 0 0;
+  }
+
+  .steps__card-text {
+    padding-bottom: 35px;
+  }
+}

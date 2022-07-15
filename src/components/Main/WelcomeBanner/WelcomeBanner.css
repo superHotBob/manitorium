@@ -1,0 +1,677 @@
+.welcome {
+  max-width: 1440px;
+  padding: 0 114px 0 180px;
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-areas:
+    "welcome image"
+    "partners image";
+  justify-content: space-between;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Стили для блока с приветственным текстом */
+.welcome__text-block {
+  grid-area: welcome;
+  max-width: 486px;
+  padding-top: 30px;
+}
+
+.welcome__title {
+  font-family: "KyivType Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 120%;
+  color: #a2a3fd;
+  margin: 0;
+}
+
+.welcome__subtitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 120%;
+  color: #918f99;
+  margin: 0;
+  padding-top: 16px;
+}
+
+.welcome__start-button {
+  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  color: #ffffff;
+  background-color: #ff8c59;
+  box-shadow: 2px 2px 12px rgba(114, 58, 33, 0.12);
+  border-radius: 45px;
+  text-decoration: none;
+  padding: 14px 32px;
+  border: none;
+  margin-top: 60px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.welcome__start-button:hover {
+  background-color: #de7342;
+}
+
+.welcome__start-button:active {
+  background: #ffb595;
+}
+
+/* Стили для блока со ссылками на партнеров */
+.welcome__partners-block {
+  grid-area: partners;
+  padding: 40px 0 30px;
+}
+
+.welcome__partners-title {
+  font-family: "KyivType Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 120%;
+  color: #a2a3fd;
+  margin: 0;
+}
+
+.welcome__partners-list {
+  display: grid;
+  grid-template-columns: repeat(6, 40px);
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 20px 0 0;
+}
+
+.welcome__item {
+  width: 40px;
+  height: 40px;
+}
+
+.welcome__parnter-link {
+  width: 100%;
+  height: 100%;
+  background: #f3eff4;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.welcome__parnter-link:hover {
+  transform: scale(1.3);
+}
+
+.welcome__partner-button {
+  width: 100%;
+  height: 100%;
+  background: #a2a3fd;
+  border-radius: 66px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для блока с изображениями */
+.welcome__image-block {
+  grid-area: image;
+  width: 616px;
+  height: 528px;
+  position: relative;
+}
+
+.welcome__back-orange-circle {
+  width: 282px;
+  height: 282px;
+  background: #ff8c59;
+  border-radius: 50%;
+  position: absolute;
+  left: 29px;
+  top: 69px;
+}
+
+.welcome__back-yellow-circle {
+  width: 436px;
+  height: 436px;
+  background: #fbea95;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.welcome__phone-image {
+  width: 270px;
+  height: 512px;
+  position: absolute;
+  left: 143px;
+  top: 0px;
+}
+
+.welcome__portfolio-block {
+  width: 242px;
+  background: #ffffff;
+  box-shadow: 0px 4px 45px rgba(87, 88, 134, 0.1);
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: flex;
+  position: absolute;
+  left: 43px;
+  top: 117px;
+  padding: 12px;
+}
+
+.welcome__portfolio-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 158%;
+  color: #a5a5a5;
+  margin: 0;
+}
+
+.welcome__portfolio-numbers {
+  display: flex;
+  align-items: flex-end;
+}
+
+.welcome__portfolio-percent {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  color: #69c760;
+  margin: 0;
+  padding-right: 4px;
+}
+
+.welcome__portfolio-money {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 120%;
+  color: #69c760;
+  margin: 0;
+}
+
+.welcome__portfolio-graph {
+  width: 141px;
+  height: 37px;
+  padding-left: 4px;
+}
+
+.welcome__graph-icon {
+  width: 136px;
+  height: 32px;
+}
+
+.welcome__history-block {
+  width: 218px;
+  background: #ffffff;
+  box-shadow: 0px 4px 45px rgba(87, 88, 134, 0.1);
+  border-radius: 12px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 50px;
+  top: 173px;
+  padding: 12px 20px;
+}
+
+.welcome__history-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 144%;
+  color: #767676;
+  margin: 0;
+}
+
+.welcome__history-graph {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 12px 0 0;
+}
+
+.welcome__month-graph {
+  width: 26px;
+}
+
+.welcome__graph {
+  background: #a2a3fd;
+  border-radius: 6px;
+}
+
+.welcome__graph_type_nov {
+  height: 63px;
+}
+
+.welcome__graph_type_dec {
+  height: 22px;
+  background: #ff8c59;
+}
+
+.welcome__graph_type_jan {
+  height: 36px;
+}
+
+.welcome__graph_type_feb {
+  height: 55px;
+}
+
+.welcome__graph_type_mar {
+  height: 72px;
+}
+
+.welcome__month {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 173%;
+  color: #767676;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.welcome__profile-block {
+  width: 246px;
+  background: #ffffff;
+  box-shadow: 0px 4px 45px rgba(87, 88, 134, 0.1);
+  border-radius: 16px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 4px;
+  bottom: 94px;
+  padding: 12px;
+}
+
+.welcome__info-block {
+  display: flex;
+}
+
+.welcome__avatar-box {
+  width: 72px;
+  height: 72px;
+  background: #edddd6;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome__avatar {
+  width: 62px;
+  height: 62px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.welcome__profile-text {
+  padding-left: 16px;
+}
+
+.welcome__profile-name {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: #0c0664;
+  margin: 0;
+}
+
+.welcome__profile-date {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 100%;
+  color: #a5a5a5;
+  margin: 0;
+  padding-top: 8px;
+}
+
+.welcome__profile-money-box {
+  display: flex;
+  padding-top: 12px;
+}
+
+.welcome__money-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.welcome__profile-money {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  color: #69c760;
+  margin: 0;
+  padding-left: 4px;
+}
+
+.welcome__profile-button {
+  width: 100%;
+  border: 1px solid #a2a3fd;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 16px;
+  padding: 7px 0;
+}
+
+.welcome__button-text {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  color: #a2a3fd;
+  margin: 0;
+}
+
+@media (max-width: 1280px) {
+  .welcome__text-block {
+    max-width: 448px;
+    padding-top: 0;
+  }
+
+  .welcome__title {
+    font-size: 46px;
+  }
+
+  .welcome__subtitle {
+    font-size: 22px;
+  }
+
+  .welcome__partners-block {
+    padding: 40px 0 0;
+  }
+
+  .welcome__image-block {
+    width: 414px;
+    height: 354px;
+  }
+
+  .welcome__back-orange-circle {
+    width: 190px;
+    height: 190px;
+    left: 20px;
+    top: 46px;
+  }
+
+  .welcome__back-yellow-circle {
+    width: 292px;
+    height: 292px;
+  }
+
+  .welcome__phone-image {
+    width: 180px;
+    height: 343px;
+    left: 96px;
+  }
+
+  .welcome__portfolio-block {
+    width: 162px;
+    box-shadow: 0px 3px 30px rgba(87, 88, 134, 0.1);
+    border-radius: 10px;
+    left: 28px;
+    top: 78px;
+    padding: 8px;
+  }
+
+  .welcome__portfolio-title {
+    font-size: 7px;
+  }
+
+  .welcome__portfolio-percent {
+    font-size: 11px;
+    padding-right: 3px;
+  }
+
+  .welcome__portfolio-money {
+    font-size: 6px;
+  }
+
+  .welcome__portfolio-graph {
+    width: 95px;
+    height: 25px;
+    padding-left: 3px;
+  }
+
+  .welcome__graph-icon {
+    width: 91px;
+    height: 22px;
+  }
+
+  .welcome__history-block {
+    width: 146px;
+    box-shadow: 0px 3px 30px rgba(87, 88, 134, 0.1);
+    border-radius: 8px;
+    right: 34px;
+    top: 116px;
+    padding: 8px 12px;
+  }
+
+  .welcome__history-title {
+    font-size: 8px;
+  }
+
+  .welcome__history-graph {
+    padding: 8px 0 0;
+  }
+
+  .welcome__month-graph {
+    width: 18px;
+  }
+
+  .welcome__graph {
+    border-radius: 4px;
+  }
+
+  .welcome__graph_type_nov {
+    height: 42px;
+  }
+
+  .welcome__graph_type_dec {
+    height: 15px;
+  }
+
+  .welcome__graph_type_jan {
+    height: 24px;
+  }
+
+  .welcome__graph_type_feb {
+    height: 37px;
+  }
+
+  .welcome__graph_type_mar {
+    height: 48px;
+  }
+
+  .welcome__month {
+    font-size: 7px;
+  }
+
+  .welcome__profile-block {
+    width: 166px;
+    box-shadow: 0px 3px 30px rgba(87, 88, 134, 0.1);
+    border-radius: 10px;
+    bottom: 63px;
+    left: 2px;
+    padding: 8px;
+  }
+
+  .welcome__avatar-box {
+    width: 56px;
+    height: 56px;
+  }
+
+  .welcome__avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .welcome__profile-text {
+    padding-left: 10px;
+  }
+
+  .welcome__profile-name {
+    font-size: 10px;
+  }
+
+  .welcome__profile-date {
+    font-size: 7px;
+    padding-top: 5px;
+  }
+
+  .welcome__profile-money-box {
+    padding-top: 8px;
+  }
+
+  .welcome__money-icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .welcome__profile-money {
+    font-size: 11px;
+    padding-left: 3px;
+  }
+
+  .welcome__profile-button {
+    border-radius: 4px;
+    margin-top: 10px;
+    padding: 4px 0;
+  }
+
+  .welcome__button-text {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .welcome {
+    padding: 0 12px 0 42px;
+  }
+}
+
+@media (max-width: 780px) {
+  .welcome__title {
+    font-size: 28px;
+  }
+
+  .welcome__subtitle {
+    font-size: 17px;
+  }
+
+  .welcome__start-button {
+    padding: 14px 24px;
+    font-size: 16px;
+    margin: 60px auto 0;
+  }
+
+  .welcome__partners-title {
+    font-size: 26px;
+  }
+
+  .welcome__partners-list {
+    grid-template-columns: repeat(3, 40px);
+    row-gap: 16px;
+    column-gap: 38px;
+  }
+}
+
+@media (max-width: 675px) {
+  .welcome {
+    padding: 0;
+    grid-template-rows: repeat(3, min-content);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "welcome"
+      "image"
+      "partners";
+    justify-content: space-between;
+    justify-items: center;
+  }
+
+  .welcome__text-block {
+    max-width: 296px;
+    text-align: center;
+  }
+
+  .welcome__partners-block {
+    max-width: 200px;
+    text-align: center;
+  }
+
+  .welcome__image-block {
+    margin-top: 40px;
+  }
+
+  .welcome__phone-image {
+    left: 120px;
+  }
+}
+
+@media (max-width: 440px) {
+  .welcome {
+    overflow: hidden;
+  }
+
+  .welcome__image-block {
+    width: 100%;
+    max-width: 373px;
+    height: 335px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .welcome__back-orange-circle {
+    width: 178px;
+    height: 178px;
+    left: 0px;
+    top: 44px;
+  }
+
+  .welcome__back-yellow-circle {
+    width: 276px;
+    height: 276px;
+    left: 98px;
+    z-index: -1;
+  }
+
+  .welcome__phone-image {
+    width: 171px;
+    height: 325px;
+    position: relative;
+    left: 0;
+    margin: 0 auto;
+  }
+
+  .welcome__portfolio-block {
+    display: none;
+  }
+
+  .welcome__history-block {
+    display: none;
+  }
+
+  .welcome__profile-block {
+    display: none;
+  }
+}

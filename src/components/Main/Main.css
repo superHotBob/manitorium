@@ -1,0 +1,22 @@
+.main {
+  padding-top: 105px;
+}
+.logo {
+  max-width: 1440px;
+  margin: auto;
+  padding: 0 160px;
+  box-sizing: border-box;
+}
+@media (max-width: 780px) {
+  .main {
+    padding-top: 60px;
+  }
+  .logo {
+    margin: 0 auto;
+    padding: 0;
+    width: 80%;
+  }
+  .logo img {
+    width: 100%;
+  }
+}
