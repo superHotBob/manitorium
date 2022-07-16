@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { setUser, setAdmin} from "../../reduser"
 import AuthPage from "../AuthPage/AuthPage";
 import Checkbox from "../AuthPage/Checkbox/Checkbox";
 import { useFormWithValidation } from "../../assets/hooks/useForm";
 import { inputIcons } from "../../assets/utils";
 import "./SignUp.css";
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+
 import {
-  useLocation
+  useLocation, useNavigate
 } from "react-router-dom"
 
 function SignUp({ onSignup, isLoading, apiError }) {
@@ -28,6 +30,26 @@ function SignUp({ onSignup, isLoading, apiError }) {
 
 
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();  
+  useEffect(() => {
+   
+      fetch(`${process.env.REACT_APP_URL}/auth/self`)
+        .then(res => res.json())
+        .then(res => {
+          dispatch(setUser(res.user));
+  
+          if (res.user.administrator) {
+            dispatch(setAdmin(true));
+            navigate("/adminpage");
+          } else {
+            navigate("/StocksPortfolioBuilder")
+          }
+        })
+      .catch(err => console.log(err.message));
+   
+   
+  }, []);
   const params = location.hash;
   const [message, setMessage] = useState(false);
 

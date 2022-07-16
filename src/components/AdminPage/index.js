@@ -204,6 +204,7 @@ const Button = styled.button`
 const ButtonCancel = styled(Button)`
     background: rgba(255, 57, 57, 0.2);
     border: 2px solid #FF3939;
+    color: #FF3939;
 `;
 const Select = styled.select`
     padding: 10px 0px 12px 20px;

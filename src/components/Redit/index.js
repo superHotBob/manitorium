@@ -11,6 +11,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
+  Cell,
 } from "recharts";
 
 const Wrapper = styled.div`
@@ -247,15 +248,19 @@ export default function RedditStockMentions() {
                 stroke="rgba(120, 118, 128, 1)"
                 vertical={false}
               />
-              <Bar dataKey="mentions" fill="#5455A9" label="false" />
+              {dataDiagram && <Bar dataKey="mentions"  label="false">
+              {
+                dataDiagram.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill='#5455A9' style={{zIndex: 100, opacity:entry.mentions/4}} />
+                ))
+              }
+              </Bar>}
             </BarChart>
           </ResponsiveContainer>
         </BlockDiagram>
       </MainBlock>
-      <MainBlock  color={color} className="main_block"> 
-
+      <MainBlock  color={color} className="main_block">
         <TitleTable color={color}>TOP 20 REDDIT Stocks Mentions</TitleTable>
-
         {dataTable && (
           <div style={{ width: "100%", height: "auto", overflowX: 'auto' }}>
             <Table color={color}>
@@ -279,7 +284,7 @@ export default function RedditStockMentions() {
                       {i.text.length > 1000 && <button onClick={() => setReadMore(readMore === i.name ? '' : i.name)}
                       >...Read more</button>}
                     </td>
-                    <td>{i.all_comments}</td>
+                    <td>{i.all_num_comments}</td>
                     <td>{i.all_likes}</td>
                   </tr>
                 ))}

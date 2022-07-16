@@ -77,6 +77,9 @@ const MenuBody = styled.div`
   @media (max-width: 600px) {
     width: ${props=>props.view ? 0 : '250px'};
     margin-left: ${props=>props.view ? '-10px' : '-10px'};
+    border-right-width: ${props=>props.view ? 0 : 'calc(100vw - 270px)'};
+    border-right-color: ${(props) => (props.color ? "#FFFBFF" : "#000")};
+    border-right-style: solid;
   }
   img {
     display: inline-block;
@@ -137,8 +140,8 @@ export default function Menu({ color, view, closeMenu }) {
         <img src={color ? logo_dack : logo} height="50px" width="130px" style={{marginTop: '-10px'}}/>
        
       </NavLink>
-      {view}
-       <img src={close_menu}  className="close" onClick={()=>closeMenu(!view)} />
+      
+       {/* <img src={close_menu}  className="close" onClick={()=>closeMenu(!view)} /> */}
        </p>
        <NavLink
         to="/howitwork"

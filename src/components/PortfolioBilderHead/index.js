@@ -29,6 +29,9 @@ const Main = styled.div`
     color: ${(props) => (props.color ? "#000" : "#fff")};
     vertical-align: super;
     font: 500 16px/16px 'Jost' , sans-serif;
+    @media (max-width: 600px) {
+      display: none;
+    } 
   }
   .title {
     margin-left: 15px;   
@@ -38,6 +41,8 @@ const Main = styled.div`
   }
   .menu {
     display: none;
+    z-index: 1000;
+    position: relative;
   }
   .theme {
     border: 1px solid ${(props) => (props.color ? "rgba(35, 35, 41, 0.2)" : "#C0C1FF")};
@@ -90,7 +95,7 @@ const Main = styled.div`
       text-decoration: none; 
     }
   }
-  .menu{
+  .menu {
     @media (max-width: 600px) {
       display: inline-block;
     } 
@@ -156,6 +161,8 @@ export default function Head({ view_menu = false }) {
       </Link> */}
 
       <div className="iconUser">
+     
+        
         <img
           className="theme"
           src={color ? moon : sun}
@@ -179,16 +186,18 @@ export default function Head({ view_menu = false }) {
           </div>
         </div>
         <svg
-          width="11"
+          width="15"
           className="theme menu"
           onClick={() => setViewMenu(!viewMenu)}
-          height="11"
+          height="15"
           viewBox="0 0 20 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M3 8H17" stroke={color ? 'black' : 'white'} stroke-linecap="round" />
-          <path d="M5 12H15" stroke={color ? 'black' : 'white'} stroke-linecap="round" />
+         {viewMenu ?<> <path d="M3 8H17" stroke={color ? 'black' : 'white'} stroke-linecap="round" />
+          <path d="M5 12H15" stroke={color ? 'black' : 'white'} stroke-linecap="round" /></> : <>
+          <path d="M20.0002 3.97266L3.97274 20.0002" stroke={color ? 'black' : '#5455A9'} stroke-width="3" stroke-linecap="round"/>
+          <path d="M3.97266 3.97266L20.0002 20.0002" stroke={color ? 'black' : '#5455A9'} stroke-width="3" stroke-linecap="round"/> </>}
         </svg>
         <span className="name">{my_name}</span>
       </div>

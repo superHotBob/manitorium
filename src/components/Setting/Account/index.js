@@ -9,13 +9,11 @@ import {  useDispatch } from 'react-redux';
 
 
 const Wrapper = styled.div`
-  
-  background: ${(props) => (props.color ? "#FFFBFF" : "#000")};
- 
+ max-height: 70vh;  
+  background: ${(props) => (props.color ? "#FFFBFF" : "#000")}; 
 `;
 
 const MainBlock = styled.div`
- 
   
   background: ${(props) =>
     props.color ? "#fff" : "rgba(27, 27, 30, 1)"};
@@ -178,7 +176,7 @@ export default function Setting() {
   return (
     <Wrapper color={color} className="wrapper">
       <Head />
-      { one_user && <MainBlock color={color} className="main_block">
+      { one_user ? <MainBlock color={color} className="main_block">
         <p className="setting_header">
           <span onClick={() => setItem('1')} className={items === '1' ? 'active' : ''}>Account setting</span>
           {/* <span onClick={() => setItem('2')} className={items === '2' ? 'active' : ''}>Your tariff</span>
@@ -238,12 +236,9 @@ export default function Setting() {
 
 
         </>}
-        {items === '2' && <>
-        </>
-
-        }
+        
        
-      </MainBlock>}
+      </MainBlock> : <MainBlock color={color} className="main_block" />}
     </Wrapper>
   );
 }

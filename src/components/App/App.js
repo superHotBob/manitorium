@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 // import { useTheme } from './assets/hooks/use-theme';
 
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser, setAdmin, setColor } from "../../reduser";
 import Main from "../Main/Main";
 import HowItsWorks from "../HowItsWorks/HowItsWorks";
@@ -61,54 +61,48 @@ function App() {
   const onSignin = (data) => {
     setIsLoading(true);
     //запрос к api, содержащий данные для логина    
-    console.log('This is my data',data);    
-    fetch(`${process.env.REACT_APP_URL}/auth/login`,{
+    console.log('This is my data', data);
+    fetch(`${process.env.REACT_APP_URL}/auth/login`, {
       method: 'post',
       body: JSON.stringify({
         password: data.password,
         email: data.email
       })
-    })   
-    .then(res => res.json())    
-    .then(res=>{     
-      if(res.success) {
-        GetUserData();
-       
-      } else {
-        navigate("/signup")
-      };
-      console.log(res)})
-    .then(res => setIsLoading(false))   
-    .catch(err=> setTimeout(() => navigate("/"), 500));
-  
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          GetUserData();
+
+        } else {
+          navigate("/signup")
+        };
+        console.log(res)
+      })
+      .then(res => setIsLoading(false))
+      .catch(err => setTimeout(() => navigate("/"), 500));
+
     setTimeout(() => setIsLoading(false), 500);
     setTimeout(() => {
       setApiError("");
     }, 10000);
   };
 
- 
+
   function GetUserData() {
+    fetch(`${process.env.REACT_APP_URL}/auth/self`)
+      .then(res => res.json())
+      .then(res => {
+        dispatch(setUser(res.user));
 
-    
-      
-       fetch(`${process.env.REACT_APP_URL}/auth/self`)     
-        .then(res => res.json())
-        .then(res => {
-          dispatch(setUser(res.user)); 
-               
-          if(res.user.administrator) {
-            dispatch(setAdmin(true));
-            navigate("/adminpage");
-          } else {
-            navigate("/StocksPortfolioBuilder")
-          }
-        })
-        .catch(err=>console.log(err.message));
-        
-
-    
-   
+        if (res.user.administrator) {
+          dispatch(setAdmin(true));
+          navigate("/adminpage");
+        } else {
+          navigate("/StocksPortfolioBuilder")
+        }
+      })
+    .catch(err => console.log(err.message));
   };
   // обработчик регистрации
   const onSignup = (data) => {
@@ -127,12 +121,12 @@ function App() {
     // .catch(err=>{ setTimeout(() => {
     //   setApiError("There is some unknown error");
     // }, 500)});
-    
-   
+
+
     // в then перенаправить на главную и уставить состояние isLoggedIn
-    
+
     // в catch поймать ошибку и установить значение apiError
-   
+
     // finally
     // setTimeout(() => {
     //   setIsLoading(false);
@@ -206,7 +200,7 @@ function App() {
 
   return (
     <div className="app">
-    
+
       {/* <Header /> */}
       <Routes>
         <Route exact path="/" element={<Main />} />
@@ -216,14 +210,14 @@ function App() {
         <Route path="/Semanticstock" element={<SemanticStock />} />
         <Route path="/tablesemanticstocknews" element={<TableSemanticStockNews />} />
         <Route path="/fundamentalkeymetric" element={<FundamentalKeyMetric />} />
-        <Route path="/how-its-works" element={<HowItsWorks />} />        
+        <Route path="/how-its-works" element={<HowItsWorks />} />
         <Route path='/pricing' element={<Pricing />} />
         <Route path='/totaltechnicalrating' element={<TotalTechnicRating />} />
         <Route path="/historicalprediction" element={<HistoricalPrediction />} />
         <Route path="/historicalpnl" element={<HistoricalPnL />} />
         <Route path="/howitwork" element={<HowItsWorks />} />
-        <Route path="/setting/account"  element={<Setting />} />
-        <Route path="/howtobuild" element={<VideoHelp/>} />
+        <Route path="/setting/account" element={<Setting />} />
+        <Route path="/howtobuild" element={<VideoHelp />} />
         <Route path='/buyportfolio' element={<BuyPortfolio />} />
         <Route path='/buildedportfolio' element={<BuildedPortfolio />} />
         <Route path='/chooseourportfolio' element={<ChooseOurPortfolio />} />
@@ -241,7 +235,7 @@ function App() {
             />
           }
         />
-        <Route         
+        <Route
           path="/signup"
           element={<SignUp {...{ onSignup, isLoading, apiError }} />}
         />

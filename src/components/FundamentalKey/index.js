@@ -158,7 +158,7 @@ const TableOne = styled.table`
   tr {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 8px 5px;
     background: ${(props) =>
     props.color
       ? "#fff"
@@ -224,10 +224,13 @@ export default function FundamentalKeyMetric() {
   const params = {
     name_contains: search,
     limit: 100,
-    offset: firstRow,
+    offset: (firstRow-1)*100,
     order_by: order,
     order_by_direction: order_direction,
   };
+  if (firstRow === 1) {delete params.offset}
+  if (!search) {delete params.name_contains}
+  
   useEffect(() => {
     if (!search) {
       delete params.name_contains;
@@ -279,7 +282,7 @@ export default function FundamentalKeyMetric() {
                 {dataTable.map((i) => (
                   <tr key={i.name}>
                     {table_data.map((a) => (
-                      <td>{typeof i[a] !== 'string' && i[a] ? (a === 'total_score' ? i[a].toFixed(0) : i[a] .toFixed(2) ) : i[a]}</td>
+                      <td>{typeof i[a] !== 'string' && i[a] ? (a === 'total_score' ? i[a].toFixed(0) : i[a] .toFixed(2).replace('.00','') ) : i[a]}</td>
                     ))}{" "}
                   </tr>
                 ))}

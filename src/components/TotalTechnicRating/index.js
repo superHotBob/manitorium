@@ -125,13 +125,14 @@ export default function TotalTechnicRating() {
     
   };
   const paramsTwoTable = {
-    name: search,
+    name_contains: search,
     limit: 20,
     offset: firstRow,
     order_by: order,
     order_by_direction: order_direction,
     
   };
+  if (!search) {delete paramsTwoTable.name_contains}
   function Sort(a) {
     SetOrder(a);
     setOrderDirection(order_direction === "asc" ? "desc" : "asc");

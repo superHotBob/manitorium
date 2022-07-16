@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setUser, setAdmin, setColor } from "../../reduser"
 import Header from "../Header/Header";
 import AuthPage from "../AuthPage/AuthPage";
 import Checkbox from "../AuthPage/Checkbox/Checkbox";
@@ -27,8 +28,24 @@ function SignIn({
     resetForm,
   } = useFormWithValidation();
 
-  //очищать форму при открытии страницы
+  const dispatch = useDispatch();
+  const navigate = useNavigate();  
   useEffect(() => {
+   
+      fetch(`${process.env.REACT_APP_URL}/auth/self`)
+        .then(res => res.json())
+        .then(res => {
+          dispatch(setUser(res.user));
+  
+          if (res.user.administrator) {
+            dispatch(setAdmin(true));
+            navigate("/adminpage");
+          } else {
+            navigate("/StocksPortfolioBuilder")
+          }
+        })
+      .catch(err => console.log(err.message));
+   
     resetForm();
   }, [resetForm]);
 

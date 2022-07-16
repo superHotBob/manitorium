@@ -6,12 +6,9 @@ import { new_color } from "../../reduser";
 import checkbox from "../../assets/images/checkbox.svg";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const Wrapper = styled.div`
-  
-  background: ${(props) => (props.color ? "#FFFBFF" : "#000")};
-  
+const Wrapper = styled.div`  
+  background: ${(props) => (props.color ? "#FFFBFF" : "#000")};  
 `;
-
 
 const MainBlock = styled.div` 
   background: ${(props) =>
@@ -146,7 +143,7 @@ export default function HistoricalPnL() {
         </filter>
         </defs>
       </svg>
-      {value.replace('_', ' ').charAt(0).toUpperCase() + value.replace('_', ' ').slice(1)}
+      {value.replace('_', ' ').toUpperCase()}
       </span>;
   };
 
@@ -169,7 +166,7 @@ export default function HistoricalPnL() {
             .replace(/_/g, ",")
             .replace("name", "Ticker")
             .split(",")
-            .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
+            .map((a) => a.toUpperCase())
             .join(" "),
         ]);
         setTableHeader(table__header);        
