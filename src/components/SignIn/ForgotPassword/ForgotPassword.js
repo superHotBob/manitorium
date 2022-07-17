@@ -153,7 +153,17 @@ function ForgotPassword({
   //обработчик сабмита формы, шаг 3
   function handleChangePassword(evt) {
     evt.preventDefault();
-    onChangePassword({ ...values });
+    // onChangePassword({ ...values });
+   fetch(`${process.env.REACT_APP_URL}/auth/recover`,{
+    method: 'POST',
+    body: JSON.stringify({email:values.email})
+   })
+    .then(res => res.json())
+    .then(res => console.log(res.success)
+     
+    )
+  .catch(err => console.log(err.message));
+
     resetForm();
   }
 

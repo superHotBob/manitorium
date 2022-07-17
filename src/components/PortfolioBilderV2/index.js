@@ -504,7 +504,7 @@ export default function PortfolioBilderV2() {
       .then((response) => response.json())
       .then(res => {
         setIndustries(res.industries);
-        console.log(res.industries.map(i=>[{'value': i, 'label' : i}]).flat());
+        
       });
   }, []);
 

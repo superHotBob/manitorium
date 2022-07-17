@@ -100,8 +100,9 @@ const BlockDiagram = styled.div`
       : "#202029"};
   border-radius: 12px;
   @media (max-width: 600px) {
-    height: 400px;
+   
     width: 98%;
+    
   }
   .recharts-cartesian-grid {
     height: 100%;
@@ -120,7 +121,7 @@ export default function HistoricalPnL() {
   
   const renderColorfulLegendText = (value,entry) => {
 
-    return <span style={{color: '#000', marginLeft: 10, fontSize: widthBlock > 1250 ? '20px' : '16px', margin: '10px' }}>
+    return <span style={{color: color ? '#000' : '#fff', marginLeft: 10, fontSize: widthBlock > 1250 ? '20px' : '16px', margin: '10px' }}>
       <svg width="25" height="26" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg" 
         style={{marginRight: 10,verticalAlign: 'middle'}}
       >

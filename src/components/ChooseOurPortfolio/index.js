@@ -75,14 +75,14 @@ const MainBlock = styled.div`
 
 
         @media (max-width: 1200px) {
-            height: 85vh;
+            /* height: 85vh; */
         }
         @media (max-width: 850px) {
                     margin: 0 auto 10px;
                     width: 96%;
                     display: block;
                     padding: 0 10px;
-                    height: 158vh;
+                   
                 }
         div.portfolio {
             height: 55px;
@@ -316,7 +316,7 @@ const Compos = styled.div`
         color: ${props => props.color ? '#000' : '#fff'};
     };
  `;
-const baseURL = `${process.env.REACT_APP_URL}/data/historical-pnl-prediction-v2`;
+
 const historical_pnl = `${process.env.REACT_APP_URL}/data/historical-pnl-cumulative`;
 const portfolio =  `${process.env.REACT_APP_URL}/data/portfolio-`;
 
@@ -452,7 +452,7 @@ export default function ChooseOurPortfolio() {
             <MainBlock color={color} className="main_block">
                 {allPortfolios && <>
                     {allPortfolios.map(v =>
-                         <div key={v} className={view_portfolio === v ? 'portfolio_block full_size' : 'portfolio_block'}>
+                        <div key={v} className={view_portfolio === v ? 'portfolio_block full_size' : 'portfolio_block'}>
                             <div className="portfolio">                           
                                 <span className="name_portfolio">{v.replace('_',' ')}</span> 
                                 <button className="btn_sell_portfolio">Buy this Portfolio</button>
