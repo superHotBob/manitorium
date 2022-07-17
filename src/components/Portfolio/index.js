@@ -42,6 +42,10 @@ const Portfolio = styled.div`
           width: 80%;
           font-weight: 500;
           display: block;
+          -webkit-border-radius: 20px;
+          -khtml-border-radius: 20px;
+          -moz-border-radius: 20px;
+          
           border-radius: 20px;
           border: 1px solid rgba(57, 255, 113, 1);
           color: rgba(57, 255, 113, 1);
@@ -58,7 +62,7 @@ const Portfolio = styled.div`
           }
           @media (max-width: 600px) {        
             width: 90%;
-            margin: 0 auto 10px;
+            margin: 10px auto 10px;
             display: block;
 
           }  
@@ -88,7 +92,7 @@ const Span = styled.span`
     padding: 27px 0 0 20px;
   }
   @media (max-width: 600px) {
-    width: 90%;
+    width: 60%;
     padding: 0 0 0 20px;
     height: 60px;
   }

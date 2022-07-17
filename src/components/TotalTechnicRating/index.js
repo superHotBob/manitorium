@@ -6,14 +6,10 @@ import { useSelector } from "react-redux";
 import { new_color } from "../../reduser";
 import sort from "../../assets/images/sort.svg";
 import sort_wr from "../../assets/images/sort_write.svg";
+import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 
 const Wrapper = styled.div`
-
   background: ${(props) => (props.color ? "#FFFBFF" : "#000")};
- 
-
-
-
 `;
 const MainBlock = styled.div`  
   background: ${(props) =>
@@ -38,6 +34,7 @@ const TableOne = styled.table`
   display: block;
   margin: 10px 0 20px;
   border-collapse: collapse;
+  border-spacing: 0;
   text-align: left;
   background: ${(props) =>
     props.color
@@ -50,6 +47,10 @@ const TableOne = styled.table`
     height: 500px;
     display: block;
     overflow-y: auto;
+    background: ${(props) =>
+    props.color
+      ? " #fff"
+      : "#202029"};
   }
   &:before {    
     font-family: "Jost";
@@ -63,23 +64,29 @@ const TableOne = styled.table`
   th,
   td {
     font: 400 14px/14px "Jost", sans-serif;
-    padding: 10px 15px 10px 12px;
-    border-spacing: 0;
+    padding: 10px 0;
+    text-align: left;
     width: 20%;
+    
     display: inline-block;
     color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
   }
   tr {
     display: flex;
     justify-content: space-between;
+    padding-left: 10px;
+    box-sizing: border-box;
+   
   }
-  tr:nth-child(even) {
+  tbody {
+  tr:nth-child(odd) {
     border-radius: 8px;     
     background: ${(props) =>
     props.color
       ? "#F6F3FB"
       : "linear-gradient(0deg, rgba(84, 85, 169, 0.11), rgba(84, 85, 169, 0.11)), #1B1B1E"}
-  }    
+  }  
+}  
 `;
 const TableTwo = styled(TableOne)` 
   width: 100%;
@@ -87,19 +94,12 @@ const TableTwo = styled(TableOne)`
   padding-top: 25px;
   &:before {
     content: 'Technical Rating Table';
-  }
-  .header_table {
-    position: sticky;
-    top: 0;
-    padding: 10px 0;
-    background: ${(props) =>
-    props.color
-      ? " linear-gradient(0deg, rgba(84, 85, 169, 0.08), rgba(84, 85, 169, 0.08)), #FFFBFF"
-      : "#202029"};
-  }
+  }  
   th,
   td {
     width: 5.5%;
+    box-sizing: border-box;
+    
   }
 `;
 
@@ -119,10 +119,9 @@ export default function TotalTechnicRating() {
 
   const paramsOneTable = {
     limit: 100,
-    offset: 1,
     order_by: "today_date",
-    order_by_direction: "asc",
-    
+    order_by_direction: "desc",
+
   };
   const paramsTwoTable = {
     name_contains: search,
@@ -130,9 +129,9 @@ export default function TotalTechnicRating() {
     offset: firstRow,
     order_by: order,
     order_by_direction: order_direction,
-    
+
   };
-  if (!search) {delete paramsTwoTable.name_contains}
+  if (!search) { delete paramsTwoTable.name_contains }
   function Sort(a) {
     SetOrder(a);
     setOrderDirection(order_direction === "asc" ? "desc" : "asc");
@@ -178,7 +177,7 @@ export default function TotalTechnicRating() {
             position: 'absolute',
             top: '40%',
             height: 8,
-            right: 19,
+            right: 10,
             transform: (order === title.toLowerCase().replace(/ /g, "_") && order_direction !== 'asc') ? 'rotate(0deg)' : 'rotate(180deg)'
           }}
         />
@@ -210,14 +209,14 @@ export default function TotalTechnicRating() {
                   </th>
                 </tr>
                 <tbody>
-                {dataOneTable.map((i) => (
-                  <tr>
-                    <td>{i.today_date}</td>
-                    <td>{i.ma_overall_rating}</td>
-                    <td>{i.os_overall_rating}</td>
-                    <td>{i.rate_overall_rating}</td>
-                  </tr>
-                ))}
+                  {dataOneTable.map((i) => (
+                    <tr>
+                      <td>{i.today_date}</td>
+                      <td>{i.ma_overall_rating}</td>
+                      <td>{i.os_overall_rating}</td>
+                      <td>{i.rate_overall_rating}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </TableOne>
             </div>
@@ -235,8 +234,9 @@ export default function TotalTechnicRating() {
               firstRow={firstRow}
               setFirstRow={setFirstRow}
             />
-            <div style={{ width: "100%", height: "auto", overflow: 'auto' }}>
-              <div style={{ width: "100%", minWidth: "1250px", height: "auto" }}>
+            <div style={{ width: "100%", height: "auto", overflow: 'auto' ,display: 'block'}}>
+
+              <thead style={{ width: 'calc(100% - 20px)', minWidth: "1250px", height: "auto" }}>
                 <tr>
                   <th>Ticker</th>
                   <th>MA Rate</th>
@@ -252,13 +252,16 @@ export default function TotalTechnicRating() {
                   <th>Rate New</th>
                   <th>Rate Sell</th>
                 </tr>
+              </thead>
+              <tbody style={{ width: "100%", minWidth: "1250px" ,boxSizing:'border-box'}}>
                 {dataTwoTable.map((i) => (
                   <tr>
-                    {nameCollumn.map(a => <td>{i[a]}</td>)}
+                    {nameCollumn.map(a => <td key={a.name}>{i[a]?i[a]:NaN}</td>)}
 
                   </tr>
                 ))}
-              </div>
+              </tbody>
+
             </div>
           </TableTwo>
         }

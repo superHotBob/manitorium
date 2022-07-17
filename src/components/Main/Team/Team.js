@@ -6,7 +6,7 @@ function Team() {
   const team = [
     {
       photo: maks,
-      name: "It’s Maks Kusnetsoff",
+      name: "It’s Max Kuznetsoff",
       career: "Data scientist, AI expert",
       text: "Text about Max",
     },
@@ -31,7 +31,7 @@ function Team() {
             <div className="team__text-box">
               <p className="team__name">{item.name}</p>
               <p className="team__career">{item.career}</p>
-              <p className="team__text">{item.text}</p>
+              {/* <p className="team__text">{item.text}</p> */}
             </div>
           </li>
         ))}

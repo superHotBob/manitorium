@@ -9,7 +9,7 @@ import {  useDispatch } from 'react-redux';
 
 
 const Wrapper = styled.div`
- max-height: 70vh;  
+   
   background: ${(props) => (props.color ? "#FFFBFF" : "#000")}; 
 `;
 
