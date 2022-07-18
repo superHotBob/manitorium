@@ -3,18 +3,16 @@ import styled from "styled-components";
 import copy_ref from '../../../assets/images/copy_ref.svg';
 import user_image from "../../../assets/images/main/joe.png";
 import Head from "../../PortfolioBilderHead";
-import { new_color, setAdmin, user, setUser, setName } from "../../../reduser";
+import { new_color, setAdmin, user, setUser, setName, setModerator } from "../../../reduser";
 import { useSelector } from 'react-redux';
 import {  useDispatch } from 'react-redux';
 
 
-const Wrapper = styled.div`
-   
+const Wrapper = styled.div`   
   background: ${(props) => (props.color ? "#FFFBFF" : "#000")}; 
 `;
 
-const MainBlock = styled.div`
-  
+const MainBlock = styled.div`  
   background: ${(props) =>
     props.color ? "#fff" : "rgba(27, 27, 30, 1)"};
   color: ${(props) => (props.color ? "#000" : "#fff")};
@@ -40,18 +38,18 @@ const MainBlock = styled.div`
     color: #fff;
     font: 500 16px/16px  'Jost', sans-serif;
   }
-  .user_data {
-    width: 80%;
+  .user_data {   
     margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    div,label {
+    
+    label,.block__data,.block__image {
       display: inline-block;
      
     }
-    .image {
+    .block__image {
       text-align: center;
-      margin-right: 100px;
+      margin-right: 5vw;
+      width: 200px;
+      
       button {
         height: 46px;
         width: 25%;
@@ -61,7 +59,7 @@ const MainBlock = styled.div`
         color: #3C3D8F;
         background-color: inherit;
       }
-     img{
+     img {
       width: auto;
       margin: 0 auto 20px;
       height: 80%;
@@ -70,23 +68,26 @@ const MainBlock = styled.div`
      }
       height: 200px;
     }
-    label {
-      font: 600 16px/16px 'Jost', sans-serif;
-      width: 23%;
-      input {
-        height: 32px;
-        width: 90%;
-        color: ${(props) => (props.color ? "#000" : "#fff")};
-        padding-left: 10px;
-        margin: 10px 0 50px;
-        border: none;       
-        background: rgba(84, 85, 169, 0.03);
-        box-shadow: 0 1px  #E4E1EC;
-        ::-webkit-input-placeholder {
-          color: silver;
+    .block__data{
+      width: 80%;
+      label {
+        font: 600 16px/16px 'Jost', sans-serif;
+        width: 200px;
+        input {
+          height: 32px;
+          width: 90%;
+          color: ${(props) => (props.color ? "#000" : "#fff")};
+          padding-left: 10px;
+          margin: 10px 0;
+          border: none;       
+          background: rgba(84, 85, 169, 0.03);
+          box-shadow: 0 1px  #E4E1EC;
+          ::-webkit-input-placeholder {
+            color: silver;
+          }
         }
       }
-    }
+    }  
   }  
   
   .setting_header {
@@ -102,19 +103,18 @@ const MainBlock = styled.div`
       opacity:  0.5;
       
     }
-    span.active {
-      
+    span.active {      
       opacity:  1 ;
       
     }
-  }
-  @media (max-width: 1200px) {
-    width: calc(100vw - 95px);
-  }
-  @media (max-width: 600px) {
-    margin: 0 auto;
-    width: 100%;
-  }
+    }
+    @media (max-width: 1200px) {
+      width: calc(100vw - 95px);
+    }
+    @media (max-width: 600px) {
+      margin: 0 auto;
+      width: 100%;
+    }
 `;
 
 
@@ -161,7 +161,7 @@ export default function Setting() {
       .then(res => {
         console.log(res.user);
          setOneUser(res.user);
-        
+         dispatch(setModerator(res.user.moderator));
          dispatch(setAdmin(res.user.administrator));
          dispatch(setName(res.user.name));
          dispatch(setUser(JSON.stringify(res.user)));         
@@ -187,11 +187,11 @@ export default function Setting() {
           <span>invite you: {one_user.invited_by_name}</span><br />
         
           <div className="user_data">
-            <div className="image" >
+            <div className="block__image" >
               <img src={user_image} alt='ige' />
               <button>Change</button>
             </div>
-            <div>
+            <div className="block__data">
               <label>
                 <span>Your full name</span>
                 <input
@@ -221,14 +221,16 @@ export default function Setting() {
                 <span>Telegram</span>
                 <input type='text' value={new_user.telegram} onChange={e => setUser(prevState => ({ ...prevState, telegram: e.target.value }))} />
               </label>
-              <label style={{ marginTop: '50px' }}>
-                <span>New password</span>
-                <input type='password' value={password} onChange={e => setPassword(e.target.value )} />
-              </label>
-              <label style={{ marginTop: '50px' }}>
-                <span>Repeat password</span>
-                <input type='passwordt' value={password} onChange={e=> setItem(e.target.value)}/>
-              </label>
+              <div style={{ marginTop: '50px' ,display:'block'}}>
+                <label >
+                  <span>New password</span>
+                  <input type='password' value={password} onChange={e => setPassword(e.target.value )} />
+                </label>
+                <label >
+                  <span>Repeat password</span>
+                  <input type='passwordt' value={password} onChange={e=> setItem(e.target.value)}/>
+                </label>
+              </div>
             </div>
 
           </div>

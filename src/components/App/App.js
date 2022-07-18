@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 // import { useTheme } from './assets/hooks/use-theme';
 
 import { useDispatch } from 'react-redux';
-import { setUser, setAdmin, setColor } from "../../reduser";
+import { setUser, setAdmin, setModerator } from "../../reduser";
 import Main from "../Main/Main";
 import HowItsWorks from "../HowItsWorks/HowItsWorks";
 import Pricing from '../Pricing/Pricing';
@@ -30,6 +30,7 @@ import BuyPortfolio from "../BuyPortfolio";
 import BuildedPortfolio from "../BuildedPortfolio";
 import ChooseOurPortfolio from "../ChooseOurPortfolio";
 import Footer from "../Footer/Footer";
+import ModeratorPage from "../ModeratorPage";
 
 
 function App() {
@@ -96,10 +97,13 @@ function App() {
         dispatch(setUser(res.user));
 
         if (res.user.administrator) {
-          dispatch(setAdmin(true));
+         
           navigate("/adminpage");
+        } else if (res.user.moderator) {
+          dispatch(setModerator(res.user.moderator));
+          navigate("/moderatorpage");
         } else {
-          navigate("/StocksPortfolioBuilder")
+          navigate("/StocksPortfolioBuilder");
         }
       })
     .catch(err => console.log(err.message));
@@ -240,6 +244,7 @@ function App() {
           element={<SignUp {...{ onSignup, isLoading, apiError }} />}
         />
         <Route path="/adminpage" element={<AdminPage />} />
+        <Route path="/moderatorpage" element={<ModeratorPage />} />
         <Route path="/new-password" element={<NewPassword />} />
         <Route path="/auth/registration-token" element={<NotActiveUser />} />
         <Route

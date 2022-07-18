@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 
 const Main = styled.div`
   width: calc(100% - 270px);
-  padding: 12px 12px 0;
+  padding: 12px;
   display: inline-block;
   box-sizing: border-box;
   vertical-align: top;

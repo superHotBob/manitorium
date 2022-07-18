@@ -74,6 +74,7 @@ p {
             height: 240px;
         }
    section {
+    width: 100%;
     h2 {
         font-size: 16px;
         line-height: 24px;
@@ -116,7 +117,7 @@ export default function NotActiveUser() {
                 <img src={women} />
                 <section>
                     <h2>Your account is under review.</h2>
-                    <p>Wait until the administrator accepts your<br />
+                    <p>Wait until the administrator accepts your <br />
                         application. If the verification is successful, we<br />
                         will notify you by mail.
                     </p>

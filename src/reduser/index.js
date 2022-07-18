@@ -4,6 +4,7 @@ const initialState = {
   color: true,
   user: {}, 
   admin: false,
+  moderator: false,
   name: '',  
   tickers: '',  
 };
@@ -21,6 +22,7 @@ export const counterSlice = createSlice({
       return {...state, user: action.payload}      
     },
     setAdmin: (state, action) => {state.admin = action.payload},
+    setModerator: (state, action) => {state.moderator = action.payload},
     setTickers: (state, action) => {     
       return {...state,tickers: action.payload} 
     }  
@@ -28,7 +30,7 @@ export const counterSlice = createSlice({
 });
 
 export const {
- setColor , setUser, setTickers, setName , setAdmin
+ setColor , setUser, setTickers, setName , setAdmin, setModerator,
 } = counterSlice.actions;
 
 export const new_color = (state) => state.counter.color;
@@ -36,6 +38,7 @@ export const name = (state) => state.counter.name;
 export const user = (state) => state.counter.user;
 export const tickers = (state) => state.counter.tickers;
 export const admin = (state) => state.counter.admin; 
+export const moderator = (state) => state.counter.moderator; 
 
 
 

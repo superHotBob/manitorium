@@ -235,8 +235,8 @@ const MainBlock = styled.div`
     
 `;
 const Table = styled.table`
-  min-width: 100%; 
-  display: block;  
+  min-width: 99%; 
+ 
   border-collapse: collapse;
   text-align: left; 
   color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
@@ -389,7 +389,7 @@ export default function ChooseOurPortfolio() {
             .catch((err) => console.log(err.message));
     };
 
-    function GetPortfolio(a) {
+    function GetPortfolio(a,b) {
         setHistory();
         setStocks();
         if (a === view_portfolio) {
@@ -400,7 +400,7 @@ export default function ChooseOurPortfolio() {
                 .then((res) => {
                     setStocks(res.stocks);
                     if (res.success) {
-                        GetHistirical(res.stocks);
+                        GetHistirical(res.stocks,b);
                     } else {
                         navigate('/')
                     }
@@ -410,10 +410,10 @@ export default function ChooseOurPortfolio() {
         }
     };
 
-    function GetHistirical(a) {
+    function GetHistirical(a,b) {
         let today = new Date().toISOString().slice(0, 10);
         const paramsHistoricalPrice = [
-            ['start', "2022-06-20"],
+            ['start', b],
             ['end', today]
         ];
         a.map(i => i.ticker).forEach(element => {
@@ -512,7 +512,7 @@ export default function ChooseOurPortfolio() {
                                 <span className="name_portfolio view" onClick={() => GetPortfolio(v.portfolio_id)}>{v.name}</span>
                                 <button onClick={() => DeletePortfolio(v.portfolio_id)} className="btn_sell_portfolio delete">
                                     Delete this Portfolio</button>
-                                <svg onClick={() => GetPortfolio(v.portfolio_id)}
+                                <svg onClick={() => GetPortfolio(v.portfolio_id, v.creation_datetime.slice(0, 10))}
                                     className={view_portfolio === v.portfolio_id ? "arrow rotate" : "arrow"}
                                     viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 >

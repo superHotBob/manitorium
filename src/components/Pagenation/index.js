@@ -38,7 +38,7 @@ const Main = styled.div`
     border-radius: 30px;
     padding: 10px 16px 10px 12px;   
     @media (max-width: 1100px) {
-      width: 200px;
+      width: 220px;
     }
   }
   .pages__search {
@@ -57,16 +57,10 @@ const Main = styled.div`
   .pages__search:active img {
     display: none;
   }
-  img.image__lupa {
-    position: absolute;
-    left: 210px;
-    top: 0;
-    transform: none !important;
-    @media (max-width: 800px) {
-      position: absolute;
-      left: calc(50% + 60px);
-      top: 10px;
-    }
+  img.image__lupa {  
+   margin-left: -30px;
+   vertical-align: middle;
+   transform: rotate(0deg);
   }
  
     p {
@@ -83,7 +77,7 @@ const Main = styled.div`
       transform: ${(props) =>
         props.color ? "rotate(0deg)" : "rotate(180deg)"};
     }
-    img:first-of-type {
+    p img:first-of-type {
       transform: ${(props) =>
         props.color ? "rotate(180deg)" : "rotate(0deg)"};
      

@@ -100,14 +100,17 @@ const BlockDiagram = styled.div`
       : "#202029"};
   border-radius: 12px;
   @media (max-width: 600px) {
-   
-    width: 98%;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
     
   }
   .recharts-cartesian-grid {
     height: 100%;
   }
 `;
+
+
 const baseURL = `${process.env.REACT_APP_URL}/data/historical-pnl-cumulative`;
 
 
@@ -121,7 +124,16 @@ export default function HistoricalPnL() {
   
   const renderColorfulLegendText = (value,entry) => {
 
-    return <span style={{color: color ? '#000' : '#fff', marginLeft: 10, fontSize: widthBlock > 1250 ? '20px' : '16px', margin: '10px' }}>
+    return <span 
+        style={{
+          color: color ? '#000' : '#fff',
+          width: '150px',
+          textAlign: 'left',
+          display: 'inline-block',
+          margin: '10px 10px 0 0', 
+          fontSize: widthBlock > 1250 ? '20px' : '16px' 
+        }}
+    >
       <svg width="25" height="26" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg" 
         style={{marginRight: 10,verticalAlign: 'middle'}}
       >
@@ -216,7 +228,7 @@ export default function HistoricalPnL() {
             <XAxis dataKey="date" axisLine={false} tickLine={false} />
             <YAxis axisLine={false} tickLine={false} />
             <Tooltip />
-            <Legend onClick={ShowLine} verticalAlign="bottom" formatter={renderColorfulLegendText} chartWidth={250}  iconSize={0} />
+            <Legend onClick={ShowLine} wrapperStyle={{left: 0}} verticalAlign="bottom" formatter={renderColorfulLegendText} chartWidth={250}  iconSize={0} />
             <Line dataKey="long_1" stroke="#1bcc6c" strokeOpacity={opacity.long_1} activeDot={{ r: 8 }}  dot={false} />
             <Line dataKey="long_2" stroke="#97e94e" strokeOpacity={opacity.long_2} activeDot={{ r: 8 }} dot={false} />
             <Line dataKey="short_1" stroke="#ff6969" strokeOpacity={opacity.short_1} activeDot={{ r: 8 }} dot={false} />

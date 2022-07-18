@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { setUser, setAdmin, setColor } from "../../reduser"
+import { setUser, setAdmin, setModerator } from "../../reduser"
 import Header from "../Header/Header";
 import AuthPage from "../AuthPage/AuthPage";
 import Checkbox from "../AuthPage/Checkbox/Checkbox";
@@ -30,18 +30,20 @@ function SignIn({
 
   const dispatch = useDispatch();
   const navigate = useNavigate();  
-  useEffect(() => {
-   
+  useEffect(() => {   
       fetch(`${process.env.REACT_APP_URL}/auth/self`)
         .then(res => res.json())
         .then(res => {
-          dispatch(setUser(res.user));
-  
+          dispatch(setUser(res.user));  
+          console.log(res.user.moderator)
           if (res.user.administrator) {
             dispatch(setAdmin(true));
             navigate("/adminpage");
+          } else if (res.user.moderator) {
+            dispatch(setModerator(true));
+            navigate("/moderatorpage");
           } else {
-            navigate("/StocksPortfolioBuilder")
+            navigate("/StocksPortfolioBuilder");
           }
         })
       .catch(err => console.log(err.message));

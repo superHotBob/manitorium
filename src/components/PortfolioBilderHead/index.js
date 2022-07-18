@@ -6,7 +6,7 @@ import sun from "../../assets/images/Shape.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logout from '../../assets/images/logout.svg';
 import Set from '../../assets/images/Set.svg';
-import { new_color, setColor, admin, user, name } from "../../reduser";
+import { new_color, setColor, admin, user, name, moderator } from "../../reduser";
 import { useSelector, useDispatch } from 'react-redux';
 import Menu from "../Menu";
 import { useState } from "react";
@@ -121,6 +121,7 @@ export default function Head({ view_menu = false }) {
   const color = useSelector(new_color);
   const my_name = useSelector(name);
   const my_admin = useSelector(admin);
+  const moderat = useSelector(moderator);
   const dispatch = useDispatch();
 
   const [viewMenu, setViewMenu] = useState(true);
@@ -182,6 +183,9 @@ export default function Head({ view_menu = false }) {
             </button>
             {my_admin && <NavLink to='/adminpage'>
               <img src={admin_panel} alt='admin' width='15' style={{ margin: '-3px 20px 0 7px' }} />Admin panel</NavLink>
+            }
+             {moderat && <NavLink to='/moderatorpage'>
+              <img src={admin_panel} alt='admin' width='15' style={{ margin: '-3px 20px 0 7px' }} />Moderator panel</NavLink>
             }
           </div>
         </div>

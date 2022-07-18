@@ -114,14 +114,14 @@ export default function TableSemanticStockNews() {
 
   const paramsOne = {
     limit: 20,
-    offset: 1,
+    
     order_by: "gradient",
     order_by_direction: "desc",
 
   };
   const paramsTwo = {
     limit: 20,
-    offset: 1,
+   
     order_by: "gradient",
     order_by_direction: "asc",
 
