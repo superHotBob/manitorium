@@ -159,7 +159,7 @@ export default function Setting() {
       fetch(`${process.env.REACT_APP_URL}/auth/self`)     
       .then(res => res.json())
       .then(res => {
-        console.log(res.user);
+       
          setOneUser(res.user);
          dispatch(setModerator(res.user.moderator));
          dispatch(setAdmin(res.user.administrator));

@@ -100,6 +100,16 @@ const Table = styled.table`
       padding-right: 10px;
       line-height: 16px;      
       display: inline-block;
+
+    }
+    .two {
+      img {        
+        float: right;
+        position: absolute;
+        top: 40%;
+        height: 8px;
+        right: 19px;
+      }
     }    
   }
   .head_row {
@@ -133,7 +143,6 @@ const Table = styled.table`
 
 
 const baseURL = `${process.env.REACT_APP_URL}/data/stock-rating`;
-const ticker = '/static/logo_stocks/';
 
 export default function MainTableV2({ 
   new_data, 
@@ -245,11 +254,11 @@ export default function MainTableV2({
     if (!place_lt) {
       delete params.place_le;
     }
-    console.log(new_data)
+    
     fetch(`${baseURL}?` + new URLSearchParams(params))
       .then((response) => response.json())
       .then((response) => {
-        console.log(response.success)
+        console.log("Stocks rating",response.update_date);
         setData(response.stock_ratings);
         dispatch(setTickers(response.stock_ratings.map(i => [{'name':i.name,'cost': i.current_price}]).flat()));
         setTotalNumbers(response.number_of_stocks);
@@ -257,7 +266,7 @@ export default function MainTableV2({
       })
       .catch(err=>{
         console.log(err.message);
-        // navigate('/');
+        navigate('/');
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -300,12 +309,7 @@ export default function MainTableV2({
                 onClick={() => Sort('place')}
                 src={color ? sort_bl : sort_wr}
                 alt="sort_icon"
-                style={{
-                  float: 'right',
-                  position: 'absolute',
-                  top: '40%',
-                  height: 8,
-                  right: 19,
+                style={{                 
                   transform: (sort.name === 'place' && sort.direction !== 'asc') ? 'rotate(0deg)' : 'rotate(180deg)'
                 }}
               />
@@ -319,28 +323,18 @@ export default function MainTableV2({
                 onClick={() => Sort('market_cap')}
                 src={color ? sort_bl : sort_wr}
                 alt="sort_icon"
-                style={{
-                  float: 'right',
-                  position: 'absolute',
-                  top: '40%',
-                  height: 8,
-                  right: 19,
+                style={{                 
                   transform: (sort.name === 'market_cap' && sort.direction !== 'asc') ? 'rotate(0deg)' : 'rotate(180deg)'
                 }}
               />
             </div>
             <div className="two" style={{ width: '120%' ,position:'relative'}}>
-              Current price
+              Current <br/> price
               <img
                 onClick={() => Sort('current_price')}
                 src={color ? sort_bl : sort_wr}
                 alt="sort_icon"
-                style={{
-                  float: 'right',
-                  position: 'absolute',
-                  top: '40%',
-                  height: 8,
-                  right: 19,
+                style={{                 
                   transform: (sort.name === 'current_price' && sort.direction !== 'asc') ? 'rotate(0deg)' : 'rotate(180deg)'
                 }}
               />
@@ -362,7 +356,7 @@ export default function MainTableV2({
                   <div className="data_row" key={i.name}>
                     <div className="one first" style={{ width: '80%' }}>{i.place}</div>
                     <div className="one first ticker" style={{ width: '120%'}}>
-                    <img src={`/static/logo_stocks/${i.name}.png`} height="30" width="30" />
+                    <img src={`/static/logo_stocks/${i.name}.png`} height="30" width="30" alt={i.name} />
                       {i.name}
                       </div>
                     <div className="two" style={{ width: '150%' }}>{i.sector}</div>

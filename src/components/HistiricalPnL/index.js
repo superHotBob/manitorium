@@ -161,8 +161,7 @@ export default function HistoricalPnL() {
   };
 
   const params = {
-    limit: 20,
-    offset: 1,
+    limit: 20,   
     order_by: "date",
     order_by_direction: "asc",
     total: 0,
@@ -172,7 +171,8 @@ export default function HistoricalPnL() {
     fetch(`${baseURL}?` + new URLSearchParams(params))
       .then((response) => response.json())
       .then((response) => {
-        setDataTable(response.historical_pnls);       
+        setDataTable(response.historical_pnls);
+        console.log("Historical pnls", response.update_date);      
         setNameCollumn(Object.keys(response.historical_pnls[0]));       
         const table__header = Object.keys(response.historical_pnls[0]).map((i) => [
           i

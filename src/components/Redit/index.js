@@ -180,14 +180,15 @@ export default function RedditStockMentions() {
       .then((response) => response.json())
       .then((response) => {
         setDataTable(response.reddit_stocks_mentions);
+        console.log('Reddit', response.update_date);
         setDataDiagram(
           response.reddit_stocks_mentions.sort((a, b) =>
             a.mentions > b.mentions ? -1 : 0
           )
         );
-        console.log(dataDiagram);
+       
       });
-    console.log(window.innerWidth)
+    
   }, []);
   const [widthBlock, setWidth] = useState(0);
   const [heightBlock, setHeight] = useState(0);

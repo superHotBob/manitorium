@@ -253,6 +253,7 @@ export default function MainTable({
     fetch(`${baseURL}?` + new URLSearchParams(params))
       .then((response) => response.json())
       .then((response) => {
+        console.log("Sstock predictions",response.update_date);
         setData(response.stock_predictions);
         setTotalNumbers(response.number_of_stocks);
         setTotalCost(response.total_cost);

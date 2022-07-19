@@ -79,6 +79,7 @@ const TableOne = styled.table`
    
   }
   tbody {
+    display: block;
   tr:nth-child(odd) {
     border-radius: 8px;     
     background: ${(props) =>
@@ -126,13 +127,13 @@ export default function TotalTechnicRating() {
   const paramsTwoTable = {
     name_contains: search,
     limit: 20,
-    offset: (firstRow-1)*20,
+    offset: (firstRow - 1) * 20,
     order_by: order,
     order_by_direction: order_direction,
 
   };
   if (!search) { delete paramsTwoTable.name_contains }
-  if (firstRow === 1) {delete paramsTwoTable.offset}
+  if (firstRow === 1) { delete paramsTwoTable.offset }
   function Sort(a) {
     SetOrder(a);
     setOrderDirection(order_direction === "asc" ? "desc" : "asc");
@@ -141,6 +142,7 @@ export default function TotalTechnicRating() {
     fetch(`${baseURLOneTable}?` + new URLSearchParams(paramsOneTable))
       .then((response) => response.json())
       .then((response) => {
+        console.log('Total technical rating', response.update_date);
         setDataOneTable(response.total_technical_ratings);
       });
   }, []);
@@ -154,7 +156,7 @@ export default function TotalTechnicRating() {
       .then((response) => response.json())
       .then((response) => {
         setDataTwoTable(response.technical_ratings);
-        console.log(Object.keys(response.technical_ratings[0]));
+        console.log('Technical rating', response.update_date);
         setNameCollumn(Object.keys(response.technical_ratings[0]))
         setPages(new Array(Math.ceil(response.total / 20)).fill(1));
       });
@@ -211,7 +213,7 @@ export default function TotalTechnicRating() {
                 </tr>
                 <tbody>
                   {dataOneTable.map((i) => (
-                    <tr>
+                    <tr key={i.today_date}>
                       <td>{i.today_date}</td>
                       <td>{i.ma_overall_rating}</td>
                       <td>{i.os_overall_rating}</td>
@@ -235,7 +237,7 @@ export default function TotalTechnicRating() {
               firstRow={firstRow}
               setFirstRow={setFirstRow}
             />
-            <div style={{ width: "100%", height: "auto", overflow: 'auto' ,display: 'block'}}>
+            <div style={{ width: "100%", height: "auto", overflow: 'auto', display: 'block' }}>
 
               <thead style={{ width: 'calc(100% - 20px)', minWidth: "1250px", height: "auto" }}>
                 <tr>
@@ -254,10 +256,10 @@ export default function TotalTechnicRating() {
                   <th>Rate Sell</th>
                 </tr>
               </thead>
-              <tbody style={{ width: "100%", minWidth: "1250px" ,boxSizing:'border-box'}}>
+              <tbody style={{ width: "100%", minWidth: "1250px", boxSizing: 'border-box' }}>
                 {dataTwoTable.map((i) => (
                   <tr>
-                    {nameCollumn.map(a => <td key={a.name}>{i[a]?i[a]:NaN}</td>)}
+                    {nameCollumn.map(a => <td key={a.name}>{i[a]}</td>)}
 
                   </tr>
                 ))}

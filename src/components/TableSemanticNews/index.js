@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Head from "../PortfolioBilderHead";
 import { useSelector } from "react-redux";
 import { new_color } from "../../reduser";
-import React, { PureComponent } from 'react';
+import React from 'react';
 import {
   BarChart,
   Bar,
@@ -12,8 +12,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  ReferenceLine,
   ResponsiveContainer,
   CartesianAxis,
 } from 'recharts';
@@ -22,20 +20,13 @@ const Wrapper = styled.div`
   background: ${(props) => (props.color ? "#FFFBFF" : "#000")};  
 
 `;
-
-
-
 const Title = styled.h2`
-  font-family: "Jost";
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 29px;
+  font: 600 24px/29px  "Jost", sans-serif; 
   margin-top: 0;
   text-align: left;
   color: ${(props) => (props.color ? "#000" : "#fff")};
 `;
-const MainBlock = styled.div`
- 
+const MainBlock = styled.div` 
   background: ${(props) =>
     props.color ? "#FFFBFF" : "rgba(27, 27, 30, 1)"};
   
@@ -79,15 +70,13 @@ const TableOne = styled.table`
     justify-content: space-between;
     padding: 10px 0; 
   }
-  tbody {
-
-  
+  tbody {  
       tr:nth-child(odd) {
         border-radius: 8px;     
         background: ${(props) =>
-        props.color
-          ? "#F3F3F9"
-          : "linear-gradient(0deg, rgba(84, 85, 169, 0.11), rgba(84, 85, 169, 0.11)), #1B1B1E"};
+    props.color
+      ? "#F3F3F9"
+      : "linear-gradient(0deg, rgba(84, 85, 169, 0.11), rgba(84, 85, 169, 0.11)), #1B1B1E"};
       }
   }   
 `;
@@ -114,17 +103,14 @@ export default function TableSemanticStockNews() {
 
   const paramsOne = {
     limit: 20,
-    
     order_by: "gradient",
     order_by_direction: "desc",
-
   };
+
   const paramsTwo = {
     limit: 20,
-   
     order_by: "gradient",
     order_by_direction: "asc",
-
   };
 
   useEffect(() => {
@@ -132,35 +118,36 @@ export default function TableSemanticStockNews() {
     fetch(`${baseURL}?` + new URLSearchParams(paramsOne))
       .then((response) => response.json())
       .then((response) => {
+        console.log('Table Semantic Stock News', response.update_date);
         setDataOneTable(response.semantic_stocks);
         postive = response.semantic_stocks;
         SetNegative();
-        
+
       });
     function SetNegative() {
       fetch(`${baseURL}?` + new URLSearchParams(paramsTwo))
         .then((response) => response.json())
         .then((response) => {
-         setDataTwoTable(response.semantic_stocks);
-         setDataDiagram([...postive,...response.semantic_stocks.sort((a,b)=>a.gradient>b.gradient?-1:1)]);
-        
+          setDataTwoTable(response.semantic_stocks);
+          setDataDiagram([...postive, ...response.semantic_stocks.sort((a, b) => a.gradient > b.gradient ? -1 : 1)]);
+
         });
     };
   }, []);
 
- 
-    const time = new Date().getTime(); // get your number
-    const date = new Date(time); // create Date object   
 
-    function my_time(a) {
+  const time = new Date().getTime(); // get your number
 
-     return ((new Date(time - a*86400000)).getFullYear() +
-      ' - ' + ((new Date(time - a*86400000)).getMonth() + 1) + 
-      ' - ' + (new Date(time -a* 86400000)).getDate()) 
-    };
- 
-    
-    // + '-' + (new Date(time - 86400000).getMounth) + '-' + (new Date(time - 86400000).getDate()) `)
+
+  function my_time(a) {
+
+    return ((new Date(time - a * 86400000)).getFullYear() +
+      ' - ' + ((new Date(time - a * 86400000)).getMonth() + 1) +
+      ' - ' + (new Date(time - a * 86400000)).getDate())
+  };
+
+
+  // + '-' + (new Date(time - 86400000).getMounth) + '-' + (new Date(time - 86400000).getDate()) `)
 
   return (
     <Wrapper color={color} className='wrapper'>
@@ -174,7 +161,7 @@ export default function TableSemanticStockNews() {
             <BarChart
               width={500}
               height={360}
-              style={{background: color? '#fff' : 'inherit',borderRadius: 12,padding: '20px 0',boxShadow:'0px 4px 40px 0px rgba(87, 88, 134, 0.04)'}}
+              style={{ background: color ? '#fff' : 'inherit', borderRadius: 12, padding: '20px 0', boxShadow: '0px 4px 40px 0px rgba(87, 88, 134, 0.04)' }}
               data={dataDiagram}
               margin={{
                 top: 5,
@@ -185,14 +172,14 @@ export default function TableSemanticStockNews() {
             >
               <CartesianGrid strokeDasharray="0 0 4 1" />
               <CartesianAxis tickMargin="20" />
-              <XAxis dataKey="name" tickLine={false}  angle={-90} axisLine={false}  dy={20}/>
-              <YAxis dataKey="gradient" tickLine={false} axisLine={false} domain={[-2.0, 2.0]} dx={-20}/>
+              <XAxis dataKey="name" tickLine={false} angle={-90} axisLine={false} dy={20} />
+              <YAxis dataKey="gradient" tickLine={false} axisLine={false} domain={[-2.0, 2.0]} dx={-20} />
               <Tooltip cursor={false} />
-            
+
               <Bar dataKey="gradient" >
-              {dataDiagram.map((entry, index) => (
-                <Cell cursor="pointer" fill={`rgba(84, 85, 169, 1)`} key={`cell-${index}`} style={{zIndex: 100, opacity: 1 - index/80}}/>
-              ))}
+                {dataDiagram.map((entry, index) => (
+                  <Cell cursor="pointer" fill={`rgba(84, 85, 169, 1)`} key={`cell-${index}`} style={{ zIndex: 100, opacity: 1 - index / 80 }} />
+                ))}
               </Bar>
               {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
             </BarChart>
@@ -200,19 +187,19 @@ export default function TableSemanticStockNews() {
         </BlockDiagram>
 
         <BlockDiagram color={color} >
-        <Title color={color}>TOP 50 Stocks with Most Positive News</Title>
-        {dataOneTable && (
-          <div style={{ width: "100%", height: "auto", overflowX: 'auto', overflowY: 'hidden',boxShadow: '0px 4px 45px rgba(87, 88, 134, 0.04)' }}>
-           
-            
+          <Title color={color}>TOP 50 Stocks with Most Positive News</Title>
+          {dataOneTable && (
+            <div style={{ width: "100%", height: "auto", overflowX: 'auto', overflowY: 'hidden', boxShadow: '0px 4px 45px rgba(87, 88, 134, 0.04)' }}>
+
+
               <TableOne color={color}>
                 <tr className="table_header">
                   <th>Ticker</th>
                   <th>{my_time(7)}</th>
                   <th>{my_time(6)}</th>
-                  <th>{my_time(5)}</th>                 
-                  <th>{my_time(4)}</th>                 
-                  <th>{my_time(3)}</th>                
+                  <th>{my_time(5)}</th>
+                  <th>{my_time(4)}</th>
+                  <th>{my_time(3)}</th>
                   <th>{my_time(2)}</th>
                   <th>{my_time(1)}</th>
                   <th>{my_time(0)}</th>
@@ -244,24 +231,24 @@ export default function TableSemanticStockNews() {
                   ))}
                 </tbody>
               </TableOne>
-          
-          </div>
-        )}
+
+            </div>
+          )}
         </BlockDiagram>
         <BlockDiagram color={color}>
 
-        <Title color={color}>TOP 50 Stocks with Most Negative News</Title>
-        {dataTwoTable && (
-          <div style={{ width: "100%", height: "auto", overflowX: 'auto', overflowY: 'hidden', boxShadow: '0 4px 40px rgba(0, 0, 0, 0.07)' }}>
-           
+          <Title color={color}>TOP 50 Stocks with Most Negative News</Title>
+          {dataTwoTable && (
+            <div style={{ width: "100%", height: "auto", overflowX: 'auto', overflowY: 'hidden', boxShadow: '0 4px 40px rgba(0, 0, 0, 0.07)' }}>
+
               <TableOne color={color}>
                 <tr className="table_header">
-                <th>Ticker</th>
+                  <th>Ticker</th>
                   <th>{my_time(7)}</th>
                   <th>{my_time(6)}</th>
-                  <th>{my_time(5)}</th>                 
-                  <th>{my_time(4)}</th>                 
-                  <th>{my_time(3)}</th>                
+                  <th>{my_time(5)}</th>
+                  <th>{my_time(4)}</th>
+                  <th>{my_time(3)}</th>
                   <th>{my_time(2)}</th>
                   <th>{my_time(1)}</th>
                   <th>{my_time(0)}</th>
@@ -293,10 +280,10 @@ export default function TableSemanticStockNews() {
                   ))}
                 </tbody>
               </TableOne>
-           
-          </div>
-        )}
-</BlockDiagram>
+
+            </div>
+          )}
+        </BlockDiagram>
       </MainBlock>
     </Wrapper>
   );
