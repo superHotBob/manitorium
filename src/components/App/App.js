@@ -204,7 +204,6 @@ function App() {
 
   return (
     <div className="app">
-
       {/* <Header /> */}
       <Routes>
         <Route exact path="/" element={<Main />} />
@@ -245,7 +244,7 @@ function App() {
         />
         <Route path="/adminpage" element={<AdminPage />} />
         <Route path="/moderatorpage" element={<ModeratorPage />} />
-        <Route path="/new-password" element={<NewPassword />} />
+        <Route path="/auth/recover-token" element={<NewPassword />} />
         <Route path="/auth/registration-token" element={<NotActiveUser />} />
         <Route
           path="/recovery-password"

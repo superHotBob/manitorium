@@ -19,7 +19,7 @@ code {
 }
 
 ::-webkit-scrollbar {
-  width: 14px; /* ширина для вертикального скролла */
+  width: 8px; /* ширина для вертикального скролла */
   height: 8px; /* высота для горизонтального скролла */
   background-color: #fff;
   border-radius: 10px;

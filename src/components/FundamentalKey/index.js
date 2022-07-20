@@ -195,7 +195,7 @@ export default function FundamentalKeyMetric() {
           style={{
             float: 'right',
             position: 'absolute',
-            top: '45%',
+            top: '5px',
             height: 8,
             right: 0,
             transform: (order === title.toLowerCase().replace(/ /g, "_") && order_direction !== 'asc') ? 'rotate(0deg)' : 'rotate(180deg)'
@@ -262,7 +262,7 @@ export default function FundamentalKeyMetric() {
           firstRow={firstRow}
           setFirstRow={setFirstRow}
         />
-        <div style={{ width: "100%", overflowX: "auto" }}>
+        <div style={{ width: "99.5%", overflowX: "auto" }}>
           {dataTable && (
             <TableOne color={color}>
               <tr className="table_header">

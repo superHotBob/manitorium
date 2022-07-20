@@ -263,8 +263,8 @@ export default function TableSemanticStockNews() {
                     height: "541px",
                   }}
                 >
-                  {dataTwoTable.map((i) => (
-                    <tr>
+                  {dataTwoTable.sort((a,b) => (Math.abs(a.gradient) < Math.abs(b.gradient)) ? 1 : -1).map((i) => (
+                    <tr key={i.name}>
                       <td>{i.name}</td>
                       <td>{i.d0 ? i.d0.toFixed(3) : 'NaN'}</td>
                       <td>{i.d1 ? i.d1.toFixed(3) : 'NaN'}</td>

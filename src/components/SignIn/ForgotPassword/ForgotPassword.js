@@ -32,8 +32,8 @@ function ForgotPassword({
     values.phone === undefined || values.phone === ""
       ? values.email && isInputValid.email
       : values.email === undefined || values.email === ""
-      ? values.phone && isPhoneValid.validState
-      : isInputValid.email && isPhoneValid.validState;
+        ? values.phone && isPhoneValid.validState
+        : isInputValid.email && isPhoneValid.validState;
 
   //очищать форму при открытии страницы
   useEffect(() => {
@@ -127,7 +127,7 @@ function ForgotPassword({
 
   //показать или скрыть ввод инпута пароля
   const [isPasswordOpen, setIsPasswordOpen] = useState(false);
-
+  const [message, setMessage] = useState(false);
   function handlePasswordToggle() {
     setIsPasswordOpen(!isPasswordOpen);
   }
@@ -154,21 +154,26 @@ function ForgotPassword({
   function handleChangePassword(evt) {
     evt.preventDefault();
     // onChangePassword({ ...values });
-   fetch(`${process.env.REACT_APP_URL}/auth/recover`,{
-    method: 'POST',
-    body: JSON.stringify({email:values.email})
-   })
-    .then(res => res.json())
-    .then(res => console.log(res.success)
-     
-    )
-  .catch(err => console.log(err.message));
+    fetch(`${process.env.REACT_APP_URL}/auth/recover`, {
+      method: 'POST',
+      body: JSON.stringify({ email: values.email })
+    })
+      .then(res => res.json())
+      .then((res) => {
+        setMessage(true);
+        setTimeout(() => setMessage(false), 10000)
+      })
+      .catch(err => console.log(err.message));
 
     resetForm();
   }
 
   return (
     <section className="forgot-password">
+      {message && <div className="message">        
+        <h2>We have sent a code to your email</h2>
+        <p>Check your email for a new message, if the code has not arrived, also check it in the spam tab</p>
+      </div>}
       <AuthPage
         type="reminder"
         welcome="Forgot your password? No worries!"
@@ -176,58 +181,57 @@ function ForgotPassword({
           step === 1
             ? "Forgot password?"
             : step === 2
-            ? "Code Verification"
-            : "New password"
+              ? "Code Verification"
+              : "New password"
         }
         subtitle={
           step === 1
             ? "Please enter your  email"
             : step === 2
-            ? "We sent invite to email, please enter it"
-            : "Please write your new password"
+              ? "We sent invite to email, please enter it"
+              : "Please write your new password"
         }
         isDisabled={
           step === 1
             ? !isFormContactsValid
             : step === 2
-            ? !isCodeValid
-            : !isFormValid
+              ? !isCodeValid
+              : !isFormValid
         }
         submitText={
           isLoading ? "Loading" : step === 3 ? "Confirm password" : "Next"
         }
-        onSubmit={step === 1 ? handleSubmitContacts : handleChangePassword}
+        onSubmit={handleChangePassword}
         onResend={handleResendCode}
         {...{ isLoading, apiError, seconds, step }}
       >
-          <div className="auth__input-box auth__input-box_type_reminder">
-            <label className="auth__label" htmlFor="email">
-              E-mail
-              <div className="auth__input-icon-box">
-                {isInputValid.email && values.email
-                  ? inputIcons.valid
-                  : inputIcons.email}
-              </div>
-              <span className="auth__error" id="email-error">
-                {errors.email || ""}
-              </span>
-              <input
-                className={`auth__input auth__input_type_email ${
-                  !isInputValid.email && isInputValid.email !== undefined
-                    ? "auth__input_type_error"
-                    : ""
+        <div className="auth__input-box auth__input-box_type_reminder">
+          <label className="auth__label" htmlFor="email">
+            E-mail
+            <div className="auth__input-icon-box">
+              {isInputValid.email && values.email
+                ? inputIcons.valid
+                : inputIcons.email}
+            </div>
+            <span className="auth__error" id="email-error">
+              {errors.email || ""}
+            </span>
+            <input
+              className={`auth__input auth__input_type_email ${!isInputValid.email && isInputValid.email !== undefined
+                  ? "auth__input_type_error"
+                  : ""
                 }`}
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Your email"
-                autoComplete="on"
-                value={values.email || ""}
-                onChange={handleChange}
-              />
-            </label>
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Your email"
+              autoComplete="on"
+              value={values.email || ""}
+              onChange={handleChange}
+            />
+          </label>
 
-            {/* <label className="auth__label" htmlFor="phone">
+          {/* <label className="auth__label" htmlFor="phone">
               Phone
               <div className="auth__input-icon-box">
                 {isPhoneValid.validState && values.phone
@@ -255,8 +259,8 @@ function ForgotPassword({
                 onKeyDown={(evt) => handlePhoneDelete(evt)}
               />
             </label> */}
-          </div>
-       
+        </div>
+
 
         {/* {step === 2 && (
           <div className="auth__input-box auth__input-box_type_verification">

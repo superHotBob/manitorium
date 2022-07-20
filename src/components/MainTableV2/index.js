@@ -106,7 +106,7 @@ const Table = styled.table`
       img {        
         float: right;
         position: absolute;
-        top: 40%;
+        top: 5px;
         height: 8px;
         right: 19px;
       }

@@ -17,7 +17,7 @@ const Main = styled.div`
   color: ${(props) => (props.color ? "#000" : "#fff")};
   font: 600 24px/28px "Jost", sans-serif;
   .iconUser {
-    display: inline-block;
+   
     width: auto;
     float: right;
     margin-right: 25px;

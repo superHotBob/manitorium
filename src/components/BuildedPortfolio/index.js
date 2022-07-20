@@ -223,7 +223,7 @@ const MainBlock = styled.div`
                 margin: 0;
             }
         }        
-    }
+    
     .full_size {
         height: 568px;
         background: ${(props) =>
@@ -236,21 +236,21 @@ const MainBlock = styled.div`
 `;
 const Table = styled.table`
   min-width: 99%; 
- 
-  border-collapse: collapse;
   text-align: left; 
-  color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
-  border-radius: 8px; 
+  color: ${(props) => (props.color ? "#fff" : "#E5E1E6")};
+  
   
    tbody {
-    height: 350px;
-    overflow-y: auto;    
-    border-radius: 8px;
-    display: block;
-    padding: 5px 5px 0;
-    background: ${(props) =>
+        height: 350px;
+        overflow-y: auto;    
+        border-radius: 8px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        display: block;
+        padding: 5px;
+        background: ${(props) =>
         props.color
-            ? "inherit"
+            ? "#fff"
             : "#000"};
              @media (max-width: 1200px) {
             height: 48.5vh;
@@ -258,25 +258,22 @@ const Table = styled.table`
 
         tr:nth-child(odd) {
             border-radius: 8px;   
-            padding: 5px 0 5px 5px;  
+            padding: 5px;  
             background: ${(props) =>
         props.color
             ? "linear-gradient(0deg, rgba(84, 85, 169, 0.11), rgba(84, 85, 169, 0.11)), #FFFBFF"
             : "linear-gradient(0deg, rgba(192, 193, 255, 0.05), rgba(192, 193, 255, 0.05)), rgb(27, 27, 30)"};
-        }        
-
-   }
+       }
+    }
  
-  th,
-  td {
-    font: 400 14px/14px "Jost", sans-serif;
-    padding: 5px 0 5px 5px;
-    border-spacing: 0;
-    width: 18%;
-    box-sizing: border-box;
-    display: inline-block;
-    color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
-  }
+    th,
+    td {
+        font: 400 14px/14px "Jost", sans-serif;
+        padding: 5px;
+        width: 14%;
+        border-spacing: 0;  
+        color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
+    }
   
   .text {
     width: 50%;
@@ -287,7 +284,7 @@ const Table = styled.table`
   }
   tr {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 5px 0 5px 5px; 
   }
 
@@ -353,6 +350,7 @@ export default function ChooseOurPortfolio() {
 
     const color = useSelector(new_color);
     const navigate = useNavigate();
+    
     const [stocks, setStocks] = useState();
     const [allPortfolios, setAllPortfolios] = useState();
     const [dataDiagram, setDataDiagram] = useState();
@@ -399,6 +397,7 @@ export default function ChooseOurPortfolio() {
                 .then((res) => res.json())
                 .then((res) => {
                     setStocks(res.stocks);
+                    console.log('This is stocks',res.stocks)
                     if (res.success) {
                         GetHistirical(res.stocks,b);
                     } else {
@@ -551,8 +550,6 @@ export default function ChooseOurPortfolio() {
                                             <Tooltip
                                                 content={<CustomTooltip />}
                                                 coordinate={{ x: -100, y: -100 }}
-
-
                                             />
                                             <Line
                                                 dot={false}
@@ -587,24 +584,28 @@ export default function ChooseOurPortfolio() {
                                 <input type='search' placeholder="Enter ticker for search" />
                                 {(history && stocks) && (
                                     <Table color={color}>
-                                        <thead>
-                                            <tr>
+                                        <thead style={{background: color ? '#fff':'#000'}}>
+                                            <tr style={{width: '97.5%',background: color ? '#fff':'#000'}}>
                                                 <th>Ticker</th>
                                                 <th>Date and time</th>
                                                 <th>Profit</th>
                                                 <th>Drawdown</th>
                                                 <th>ATH</th>
+                                                <th>Buy price</th>
+                                                <th>Now price</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {history.filter(i => i.date === last_date_history).map((i) => (
+                                            {history.filter(i => i.date === last_date_history).map((i,index) => (
                                                 <tr>
                                                     <td>{i.name}</td>
                                                     <td>{i.date}</td>
                                                     <td>{Profit(i.name, i.close)}%</td>
                                                     <td>{Drawdown(i.name)}</td>
                                                     <td>{ATH(i.name)}</td>
+                                                    <th>{stocks[index]['price']}</th>
+                                                    <th>{i.close}</th>
                                                 </tr>
                                             ))}
                                         </tbody>

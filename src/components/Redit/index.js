@@ -168,11 +168,10 @@ export default function RedditStockMentions() {
   const [dataDiagram, setDataDiagram] = useState();
 
   const params = {
-    limit: 20,
-    offset: 1,
-    order_by: "name",
-    order_by_direction: "asc",
-    total: 0,
+    limit: 20,   
+    order_by: "mentions",
+    order_by_direction: "desc",
+    
   };
 
   useEffect(() => {
@@ -180,6 +179,7 @@ export default function RedditStockMentions() {
       .then((response) => response.json())
       .then((response) => {
         setDataTable(response.reddit_stocks_mentions);
+        console.log(response.reddit_stocks_mentions)
         console.log('Reddit', response.update_date);
         setDataDiagram(
           response.reddit_stocks_mentions.sort((a, b) =>
@@ -188,7 +188,7 @@ export default function RedditStockMentions() {
         );
        
       });
-    
+    console.log(window.innerWidth)
   }, []);
   const [widthBlock, setWidth] = useState(0);
   const [heightBlock, setHeight] = useState(0);
@@ -252,7 +252,7 @@ export default function RedditStockMentions() {
               {dataDiagram && <Bar dataKey="mentions"  label="false">
               {
                 dataDiagram.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill='#5455A9' style={{zIndex: 100, opacity:entry.mentions/4}} />
+                  <Cell key={`cell-${index}`} fill='#5455A9' style={{zIndex: 100, opacity:entry.mentions/dataTable[0]['mentions']}} />
                 ))
               }
               </Bar>}

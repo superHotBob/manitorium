@@ -19,7 +19,7 @@ const Wrapper = styled.div`
     background-color: rgba(0 , 0, 0, 0.5);   
     top:0;
     left: 0;
-    width: 100vw;
+    width: 99vw;
     .user__profile {
         width: 33%;
         min-width: 350px;
@@ -122,24 +122,20 @@ const MainBlock = styled.div`
     width: 100%;
   }
 `;
-const Table = styled.table`
-  min-width: 1250px; 
+const Table = styled.table` 
   width: 100%;
-  display: block;
   margin-bottom: 20px;
   height: auto;
-  overflow: auto;
-  border-collapse: collapse;
+  overflow: auto;  
   text-align: left;
   background: ${(props) =>
         props.color
             ? " #FAFAFC"
             : "#202029"};
   color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
-  border-radius: 8px;
-  padding: 12px 12px;
-  .table_header {
-      width: 100%;
+  
+  padding: 12px;
+  .table_header {     
       position: sticky;
       top: 0;
       padding-right: 20px;
@@ -149,8 +145,7 @@ const Table = styled.table`
             : "#202029"};
   }
   tbody {
-    height: 60vh;
-    display: block;
+    height: auto;   
     overflow: auto;
     border-radius: 8px;
     background: ${(props) => props.color ? " inherit" : "rgba(84, 85, 169, 0.11)"};
@@ -160,9 +155,9 @@ const Table = styled.table`
     font: 400 14px/14px "Jost", sans-serif;
     padding: 10px 0 10px 10px;
     border-spacing: 0;
-    width: 15%;
+   
     box-sizing: border-box;
-    display: inline-block;
+   
     color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
   }
   
@@ -174,8 +169,7 @@ const Table = styled.table`
     }
   }
   tr {
-    display: flex;
-    justify-content: space-between;
+   
     padding: 5px 0;
     cursor: pointer; 
   }
@@ -216,15 +210,15 @@ const Select = styled.select`
 
 `;
 
-const InputDate = styled.input`
-        width: 30%;
-        margin: 20px 20px 0 0;
-        padding: 10px;       
-        background: #FFFFFF;
-        opacity: 0.8;
-        border: 1px solid #E4E1EC;
-        border-radius: 30px;
-`;
+// const InputDate = styled.input`
+//         width: 30%;
+//         margin: 20px 20px 0 0;
+//         padding: 10px;       
+//         background: #FFFFFF;
+//         opacity: 0.8;
+//         border: 1px solid #E4E1EC;
+//         border-radius: 30px;
+// `;
 
 export default function ModeratorPage() {
 
@@ -380,7 +374,7 @@ export default function ModeratorPage() {
                         target="_blank"
                      className="download">Create csv <img src={download} /></CSVLink></div>
                 <Table color={color}>
-                    <thead>
+                   
                         <tr>
                             <td>Name Surname</td>
                             <td>Email</td>
@@ -389,7 +383,7 @@ export default function ModeratorPage() {
                             <td>Partner</td>
                             <td>Status</td>
                         </tr>
-                    </thead>
+                   
                     {users && <tbody>
                         {users.map((i) => (
                             <tr onClick={() => ViewUser(i.email)} key={i.email}>
@@ -420,30 +414,10 @@ export default function ModeratorPage() {
                         <h4>{viewUser.registration_start_datetime.slice(0, 10)}</h4>
                         <h6>Why invite</h6>
                         <h4>{viewUser.invited_by_email}</h4>
-                        <h6>Tag</h6>
-                        <Select 
-                            disabled={!viewUser.confirmed}  
-                            defaultValue={viewUser.moderator} 
-                            onChange={e=>setDataUser(prevState=>({...prevState,moderator: e.target.value}))}
-                        >
-                            <option value='false'>User</option>
-                            <option value='true'>Moderator</option>
-                        </Select>
-                        <h6>Partners</h6>
-                        <Select 
-                            disabled={!viewUser.confirmed} 
-                            defaultValue={dataUser.partner} 
-                            value={dataUser.partner} 
-                            onChange={(e) => setDataUser(prevState=>({...prevState,partner: e.target.value}))}
-                        >
-
-                            <option value=''></option>
-                            <option value="add">add new partner</option>
-                            {allPartners.map(user => <option key={user} value={user}>{user} </option>)}
-
-                        </Select>
-                        {dataUser.partner === 'add' && <input type='text' ref={new_partner} className="new_partner" placeholder="new partner" />}
-                        <h6>Status</h6>
+                          
+                        
+                       
+                        {/* <h6>Status</h6>
                         <Select disabled={!viewUser.confirmed}>
                             <option value='paid'>Paid</option>
                             <option value='unpaid'>Unpaid</option>
@@ -455,7 +429,7 @@ export default function ModeratorPage() {
                         <div className="buttons">
                             <Button onClick={() => SaveUser(viewUser.email)}>Save</Button>
                             <ButtonCancel onClick={() => setViewUser()}>Cancel</ButtonCancel>
-                        </div>
+                        </div> */}
                     </div>
                 </div>}
             </MainBlock>

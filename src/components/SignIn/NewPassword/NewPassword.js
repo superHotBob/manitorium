@@ -4,6 +4,7 @@ import { useFormWithValidation } from "../../../assets/hooks/useForm";
 import { inputIcons } from "../../../assets/utils";
 import "./NewPassword.css";
 import {   
+  useNavigate,
   useLocation
 } from "react-router-dom"
 
@@ -29,19 +30,27 @@ function NewPassword({
   } = useFormWithValidation();
 
     const location = useLocation();
+    const navigate  = useNavigate();
     const params = location.hash;
-
-    function ConfirmPassword() {
-        fetch('https://api.dev.manizz.com/auth/recover-password', {
+    const [message, setMessage] = useState(false);
+    function ConfirmPassword(evt) {
+        evt.preventDefault();
+        fetch(`${process.env.REACT_APP_URL}/auth/recover-password`, {
             method: 'POST',
             // headers: {
             //     'Accept': 'application/json',
             //     'Content-Type': 'application/json'
             // },
-            body: JSON.stringify({ 'recover_token': params ,'new_password': values.password})
+            body: JSON.stringify({ 'recover_token': params.replace('#', '') ? params.replace('#', '') : null,'new_password': values.password})
         })
         .then((res)=>res.json())
-        .then((res)=>console.log(res))
+        .then((res) => {
+          setMessage(true);
+          setTimeout(() => {
+            setMessage(false);
+            navigate('/signin');
+          }, 10000)
+        })
         .catch(err=>console.log(err.message));
 
        
@@ -89,63 +98,63 @@ function NewPassword({
   }
 
   //обработчик ввода верификационного кода
-  const [code, setCode] = useState("");
-  const [isCodeValid, setIsCodeValid] = useState(false);
+  // const [code, setCode] = useState("");
+  // const [isCodeValid, setIsCodeValid] = useState(false);
   const [password, setPassword] = useState('');
 
-  function handleVerificationChange(evt) {
-    const input = evt.target;
-    let value = input.value.replace(/\D/g, "");
+  // function handleVerificationChange(evt) {
+  //   const input = evt.target;
+  //   let value = input.value.replace(/\D/g, "");
    
-    let newCode = "";
-    const name = input.name;
-    const id = input.id;
-    const inputIndex = id.split("-").slice(1);
-    const index = parseInt(inputIndex, 10);
+  //   let newCode = "";
+  //   const name = input.name;
+  //   const id = input.id;
+  //   const inputIndex = id.split("-").slice(1);
+  //   const index = parseInt(inputIndex, 10);
 
-    handleCodeChange(value, name);
-    setIsCodeValid(input.closest("form").checkValidity());
-    if (value !== "") {
-      newCode = code + value;
-      setCode(newCode);
-      if (value.length === input.maxLength) {
-        if (index < 4) {
-          const nextInput = document.querySelector(
-            `input[id=code-${index + 1}]`
-          );
-          if (nextInput !== null) {
-            nextInput.focus();
-          }
-        }
-      }
-    }
+  //   handleCodeChange(value, name);
+  //   setIsCodeValid(input.closest("form").checkValidity());
+  //   if (value !== "") {
+  //     newCode = code + value;
+  //     setCode(newCode);
+  //     if (value.length === input.maxLength) {
+  //       if (index < 4) {
+  //         const nextInput = document.querySelector(
+  //           `input[id=code-${index + 1}]`
+  //         );
+  //         if (nextInput !== null) {
+  //           nextInput.focus();
+  //         }
+  //       }
+  //     }
+  //   }
 
-    if (newCode.length === 4) {
-      onSubmitVerification(newCode);
-      resetForm();
-    }
+  //   if (newCode.length === 4) {
+  //     onSubmitVerification(newCode);
+  //     resetForm();
+  //   }
 
-    if (apiError) setIsCodeValid(false);
-  }
+  //   if (apiError) setIsCodeValid(false);
+  // }
 
-  function handleCodeDelete(evt) {
-    const input = evt.target;
-    const id = input.id;
-    const inputIndex = id.split("-").slice(1);
-    const index = parseInt(inputIndex, 10);
+  // function handleCodeDelete(evt) {
+  //   const input = evt.target;
+  //   const id = input.id;
+  //   const inputIndex = id.split("-").slice(1);
+  //   const index = parseInt(inputIndex, 10);
 
-    if (evt.keyCode === 8) {
-      setCode(code.slice(0, -1));
-      if (index > 1) {
-        const previousInput = document.querySelector(
-          `input[id=code-${index - 1}]`
-        );
-        if (previousInput !== null) {
-          previousInput.focus();
-        }
-      }
-    }
-  }
+  //   if (evt.keyCode === 8) {
+  //     setCode(code.slice(0, -1));
+  //     if (index > 1) {
+  //       const previousInput = document.querySelector(
+  //         `input[id=code-${index - 1}]`
+  //       );
+  //       if (previousInput !== null) {
+  //         previousInput.focus();
+  //       }
+  //     }
+  //   }
+  // }
 
   //показать или скрыть ввод инпута пароля
   const [isPasswordOpen, setIsPasswordOpen] = useState(false);
@@ -175,15 +184,19 @@ function NewPassword({
   }
 
   //обработчик сабмита формы, шаг 3
-  function handleChangePassword(evt) {
-    evt.preventDefault();
-    // onChangePassword({ ...values });
-    ConfirmPassword();
-    resetForm();
-  }
-
+  // function handleChangePassword(evt) {
+  //   evt.preventDefault();
+  //   // onChangePassword({ ...values });
+  //   ConfirmPassword();
+  //   resetForm();
+  // }
+ 
   return (
     <section className="forgot-password">
+      {message && <div className="message">
+        <h2>Password successfully changed</h2>
+        
+      </div>}
       <AuthPage
         type="reminder"
         hash={location.hash}
@@ -192,15 +205,15 @@ function NewPassword({
           
         subtitle="Please write your new password"
        
-        isDisabled={
-          step === 1
-            ? !isFormContactsValid
-            : step === 2
-            ? !isCodeValid
-            : !isFormValid
-        }
+        isDisabled={!isFormValid}
+        //   step === 1
+        //     ? !isFormContactsValid
+        //     : step === 2
+        //     ? !isCodeValid
+        //     : 
+        // }
         submitText= "Confirm password"
-        onSubmit={step === 1 ? handleSubmitContacts : handleChangePassword}
+        onSubmit={ConfirmPassword}
         onResend={handleResendCode}
         {...{ isLoading, apiError, seconds, step }}
       >

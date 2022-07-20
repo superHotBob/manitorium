@@ -71,7 +71,7 @@ const MainBlock = styled.div`
         props.color
             ? '#FAFAFC'
             : 'linear-gradient(0deg, rgba(192, 193, 255, 0.05), rgba(192, 193, 255, 0.05)), #1B1B1E'
-        };
+    };
 
 
         @media (max-width: 1200px) {
@@ -136,9 +136,9 @@ const MainBlock = styled.div`
                 padding: 12px;
                 float: left;
                 background: ${(props) => props.color
-                    ? "#FAFAFC"
-                    : " #1B1B1E"
-                };
+        ? "#FAFAFC"
+        : " #1B1B1E"
+    };
                 &:before {                   
                     margin-bottom: 10px;
                     font: 500 20px/24px 'Jost', sans-serif;
@@ -213,21 +213,20 @@ const MainBlock = styled.div`
         props.color
             ? '#fff'
             : 'linear-gradient(0deg, rgba(192, 193, 255, 0.05), rgba(192, 193, 255, 0.05)), #1B1B1E'
-        };
+    };
     }
     
 `;
 const Table = styled.table`
-  min-width: 100%; 
-  display: block;  
-  border-collapse: collapse;
-  text-align: left; 
+  width: 100%; 
+  text-align: center;
+ 
   color: ${(props) => (props.color ? "#FAFAFC" : "#E5E1E6")};
   border-radius: 8px; 
     thead {     
       background: ${(props) =>
         props.color
-            ? " #FAFAFC"
+            ? " #fff"
             : "#202029"};
 
 
@@ -235,15 +234,23 @@ const Table = styled.table`
     tbody {
         height: 334px;
         display: block;
-        overflow-y: auto;    
+        overflow-y: auto; 
+        text-align: center ;
         border-radius: 8px;
         padding: 0 5px;
         background: ${(props) =>
-            props.color
-                ? "inherit"
-                : "#000"};
+        props.color
+            ? "#fff"
+            : "#000"};
 
-
+tr:nth-child(odd) {
+    border-radius: 8px;   
+    padding: 5px 0 5px 5px;  
+    background: ${(props) =>
+        props.color
+            ? "linear-gradient(0deg, rgba(84, 85, 169, 0.11), rgba(84, 85, 169, 0.11)), #FFFBFF"
+            : "linear-gradient(0deg, rgba(192, 193, 255, 0.05), rgba(192, 193, 255, 0.05)), rgb(27, 27, 30)"};
+  }        
         .ticker {
             text-align: center;
             line-height: 30px;
@@ -262,9 +269,8 @@ const Table = styled.table`
     font: 400 14px/30px "Jost", sans-serif;
     padding: 5px 0 5px 5px;
     border-spacing: 0;
-    width: 18%;
-    box-sizing: border-box;
-    display: inline-block;
+    width: 20%;
+   
     color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
   }
   
@@ -276,18 +282,11 @@ const Table = styled.table`
     }
   }
   tr {
-    display: flex;
-    justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
     padding: 5px 0 5px 5px; 
   }
-  tr:nth-child(even) {
-    border-radius: 8px;   
-    padding: 5px 0 5px 5px;  
-    background: ${(props) =>
-        props.color
-            ? "linear-gradient(0deg, rgba(84, 85, 169, 0.11), rgba(84, 85, 169, 0.11)), #FFFBFF"
-            : "linear-gradient(0deg, rgba(192, 193, 255, 0.05), rgba(192, 193, 255, 0.05)), rgb(27, 27, 30)"};
-  }        
+  
 `;
 const Compos = styled.div`
     height: 4px;
@@ -296,7 +295,7 @@ const Compos = styled.div`
     background-color: ${props => props.color ? '#000' : '#fff'};
     position: relative;
     &:before {
-        content: '${props=>props.ticker}';
+        content: '${props => props.ticker}';
         position: absolute;
         font-size: 12px;
         display: inline-block;
@@ -307,7 +306,7 @@ const Compos = styled.div`
         color: ${props => props.color ? '#000' : '#fff'};
     }
     &:after {
-        content: '${props=>props.percent}%';
+        content: '${props => props.percent}%';
         position: absolute;
         margin-left: 10px;
         font-size: 12px;
@@ -318,7 +317,7 @@ const Compos = styled.div`
  `;
 
 const historical_pnl = `${process.env.REACT_APP_URL}/data/historical-pnl-cumulative`;
-const portfolio =  `${process.env.REACT_APP_URL}/data/portfolio-`;
+const portfolio = `${process.env.REACT_APP_URL}/data/portfolio-`;
 
 export default function ChooseOurPortfolio() {
 
@@ -326,7 +325,7 @@ export default function ChooseOurPortfolio() {
     const navigate = useNavigate();
 
     const [portfolios, setDataPortfolio] = useState();
-    const [allPortfolios, setAllPortfolios] = useState(['long_1','long_2','short_1','short_2']);
+    const [allPortfolios, setAllPortfolios] = useState(['long_1', 'long_2', 'short_1', 'short_2']);
     const [dataDiagram, setDataDiagram] = useState();
     const [view_portfolio, setViewPortfolio] = useState();
     const [stocks, setStocks] = useState();
@@ -354,98 +353,98 @@ export default function ChooseOurPortfolio() {
     //         .catch((err) => console.log(err.message));
     // }, []);
     const diagramLine = {
-        limit: 20,
-        offset: 1,
+        limit: 20,       
         order_by: "date",
-        order_by_direction: "asc",
-       
-      };
-    
-      useEffect(() => {
+        order_by_direction: "desc",
+
+    };
+
+    useEffect(() => {
         fetch(`${historical_pnl}?` + new URLSearchParams(diagramLine))
-          .then((response) => response.json())
-          .then((response) => {
-            if(response.success) {
-                setDataDiagram(response.historical_pnls);           
-                console.log('data diagram',response.historical_pnls);
-            } else {
-                // navigate('/')
-            }            
-           
-          });
-      }, []);
-      const CustomTooltip = ({ active, payload, label }) => {
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.success) {
+                    setDataDiagram(response.historical_pnls.sort((a,b)=>
+                    Number(a.date.replace(/-/g,'')) > Number(b.date.replace(/-/g,'')) ? 1 : -1));
+                    console.log('data diagram', response.historical_pnls);
+                } else {
+                    // navigate('/')
+                }
+
+            });
+    }, []);
+    const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
-          return (
-            <div className="custom-tooltip">
-               <span>{label}</span> 
-              <p className="label">{`${payload[0].value.toFixed(0)}`}%</p>            
-            </div>
-          );
-        }      
-        return null;
-      };
-      const CustomizedAxisTickX = (props) => {
-        const { x, y, payload } = props;      
-        return (
-          <g transform={`translate(${x},${y})`}>
-            <text
-              x={0}
-              y={0}
-              dy={16}            
-              fill="#666"
-            
-            >
-              {payload.value ? payload.value.slice(5) : null}
-            </text>
-          </g>
-        );
-      };
-      const CustomizedAxisTickY = (props) => {
-        const { x, y, payload } = props;      
-        return (
-          <g transform={`translate(${x},${y})`}>
-            <text
-              x={0}
-              y={-10}
-              dy={16}
-              textAnchor="end"
-              fill="#666"
-            
-            >
-              {payload.value ? payload.value.toFixed(0) : null}
-            </text>
-          </g>
-        );
-      };
-        function GetPortfolio(a) {
-            let path_url = a.replace('_','-').replace('1','one').replace('2','two');              
-            setStocks();
-            if(view_portfolio === a) {
-                setViewPortfolio()
-            } else {
-            setViewPortfolio(a);
-                fetch(`${portfolio}${path_url}?` +  new URLSearchParams(params))
-                    .then((res) => res.json())
-                    .then((res) => {               
-                        if(res.success) {
-                            setStocks(res.portfolios);
-                            // setLastTime(res.portfolios.map(time=>time.date));
-                            setMaxDate(Math.max.apply(null,[...new Set(res.portfolios.map(time=> Date.parse(time.date)))]))                                 
-                        } else {
-                            navigate('/')
-                        }              
-                })           
-                .catch((err) => console.log(err.message));
-            };        
-        };
-        function Profit(a) {
-            const profit = dataDiagram.map(i=>i[a]);           
-            return profit[profit.length - 1].toFixed(0);
-        };
-        function convertDate(a) {
-           return  Date.parse(a);
+            return (
+                <div className="custom-tooltip">
+                    <span>{label}</span>
+                    <p className="label">{`${payload[0].value.toFixed(0)}`}%</p>
+                </div>
+            );
         }
+        return null;
+    };
+    const CustomizedAxisTickX = (props) => {
+        const { x, y, payload } = props;
+        return (
+            <g transform={`translate(${x},${y})`}>
+                <text
+                    x={0}
+                    y={0}
+                    dy={16}
+                    fill="#666"
+
+                >
+                    {payload.value ? payload.value.slice(5) : null}
+                </text>
+            </g>
+        );
+    };
+    const CustomizedAxisTickY = (props) => {
+        const { x, y, payload } = props;
+        return (
+            <g transform={`translate(${x},${y})`}>
+                <text
+                    x={0}
+                    y={-10}
+                    dy={16}
+                    textAnchor="end"
+                    fill="#666"
+
+                >
+                    {payload.value ? payload.value.toFixed(0) : null}
+                </text>
+            </g>
+        );
+    };
+    function GetPortfolio(a) {
+        let path_url = a.replace('_', '-').replace('1', 'one').replace('2', 'two');
+        setStocks();
+        if (view_portfolio === a) {
+            setViewPortfolio()
+        } else {
+            setViewPortfolio(a);
+            fetch(`${portfolio}${path_url}?` + new URLSearchParams(params))
+                .then((res) => res.json())
+                .then((res) => {
+                    if (res.success) {
+                        setStocks(res.portfolios);
+                        // setLastTime(res.portfolios.map(time=>time.date));
+                        setMaxDate(Math.max.apply(null, [...new Set(res.portfolios.map(time => Date.parse(time.date)))]))
+                    } else {
+                        navigate('/')
+                    }
+                })
+                .catch((err) => console.log(err.message));
+        };
+    };
+    function Profit(a) {
+        const profit = dataDiagram.map(i => i[a]);
+        return profit[profit.length - 1].toFixed(0);
+    };
+    function convertDate(a) {
+        return Date.parse(a);
+    }
     return (
         <Wrapper color={color} className="wrapper">
             <Head />
@@ -453,103 +452,103 @@ export default function ChooseOurPortfolio() {
                 {allPortfolios && <>
                     {allPortfolios.map(v =>
                         <div key={v} className={view_portfolio === v ? 'portfolio_block full_size' : 'portfolio_block'}>
-                            <div className="portfolio">                           
-                                <span className="name_portfolio">{v.replace('_',' ')}</span> 
+                            <div className="portfolio">
+                                <span className="name_portfolio">{v.replace('_', ' ')}</span>
                                 <button className="btn_sell_portfolio">Buy this Portfolio</button>
-                                <svg onClick={()=>GetPortfolio(v)} className={ view_portfolio === v ? "arrow rotate":"arrow"}  width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path 
-                                        d="M1.5 1L8.29372 7.34081C8.68766 7.70849 9.3021 7.6979 9.68314 7.31686L16 1" 
-                                        stroke={color ? "#000": "#fff"} 
-                                        strokeWidth="2" 
+                                <svg onClick={() => GetPortfolio(v)} className={view_portfolio === v ? "arrow rotate" : "arrow"} width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.5 1L8.29372 7.34081C8.68766 7.70849 9.3021 7.6979 9.68314 7.31686L16 1"
+                                        stroke={color ? "#000" : "#fff"}
+                                        strokeWidth="2"
                                         stroke-linecap="round"
                                     />
                                 </svg>
                             </div>
-                            {dataDiagram && 
-                            <div className="image_block wrapp" >
-                               
-                                <div className="image_block" style={{ width: "100%", height: 290 }}>
-                                   
-                                    <ResponsiveContainer>
-                                        <LineChart
-                                            width={700}
-                                            height={200}
-                                            data={dataDiagram}
-                                            margin={{
-                                                top: 50,
-                                                right: 5,
-                                                left: -35,
-                                                bottom: 20
-                                            }}
-                                        >
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis 
-                                                dataKey="date" 
-                                                tick={<CustomizedAxisTickX />}
-                                                tickLine={false}                                           
-                                                axisLine={false}  
-                                            />
-                                            <YAxis 
-                                                dataKey={v.toLowerCase()} 
-                                                domain={['dataMin -5', 'dataMax + 5']}
-                                                tickLine={false}                                           
-                                                axisLine={false} 
-                                                tick={<CustomizedAxisTickY />} 
-                                            />
-                                            <Tooltip 
-                                                content={<CustomTooltip />}  
-                                                coordinate={{ x: -100, y: -100 }}     
-                                           
-                                            
-                                            />                  
+                            {dataDiagram &&
+                                <div className="image_block wrapp" >
 
-                                            <Line
-                                                dot={false}
-                                                dataKey={v.toLowerCase()}
-                                                stroke="#8884d8"
-                                                activeDot={{ r: 8}}
-                                            />
+                                    <div className="image_block" style={{ width: "100%", height: 290 }}>
 
-                                        </LineChart>
-                                    </ResponsiveContainer>
-                                </div>
-                                
-                                {stocks && <div className="portfolio_composition" >
-                                    <div style={{height: 105, overflowY: 'auto',marginTop: 20}}> 
-                                        {stocks.filter(d=>Date.parse(d.date) === maxDate).map((i,index)=>
-                                            <Compos 
-                                                key={index}
-                                                color={color}
-                                                percent={(100/stocks.filter(d=>Date.parse(d.date) === maxDate).length).toFixed(1)}
-                                                ticker={i.name} 
-                                                style={{width: '20%' }}
-                                            />                                    
-                                        )}                               
+                                        <ResponsiveContainer>
+                                            <LineChart
+                                                width={700}
+                                                height={200}
+                                                data={dataDiagram}
+                                                margin={{
+                                                    top: 50,
+                                                    right: 5,
+                                                    left: -35,
+                                                    bottom: 20
+                                                }}
+                                            >
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis
+                                                    dataKey="date"
+                                                    tick={<CustomizedAxisTickX />}
+                                                    tickLine={false}
+                                                    axisLine={false}
+                                                />
+                                                <YAxis
+                                                    dataKey={v.toLowerCase()}
+                                                    domain={['dataMin -5', 'dataMax + 5']}
+                                                    tickLine={false}
+                                                    axisLine={false}
+                                                    tick={<CustomizedAxisTickY />}
+                                                />
+                                                <Tooltip
+                                                    content={<CustomTooltip />}
+                                                    coordinate={{ x: -100, y: -100 }}
+
+
+                                                />
+
+                                                <Line
+                                                    dot={false}
+                                                    dataKey={v.toLowerCase()}
+                                                    stroke="#8884d8"
+                                                    activeDot={{ r: 8 }}
+                                                />
+
+                                            </LineChart>
+                                        </ResponsiveContainer>
                                     </div>
+
+                                    {stocks && <div className="portfolio_composition" >
+                                        <div style={{ height: 105, overflowY: 'auto', marginTop: 20 }}>
+                                            {stocks.filter(d => Date.parse(d.date) === maxDate).map((i, index) =>
+                                                <Compos
+                                                    key={index}
+                                                    color={color}
+                                                    percent={(100 / stocks.filter(d => Date.parse(d.date) === maxDate).length).toFixed(1)}
+                                                    ticker={i.name}
+                                                    style={{ width: '20%' }}
+                                                />
+                                            )}
+                                        </div>
                                     </div>
-                                }
-                                <div className="profit" >
-                                    <p>Profit</p>
-                                    <h2>{Profit(v)}%</h2>
-                                </div>
-                            </div>}
+                                    }
+                                    <div className="profit" >
+                                        <p>Profit</p>
+                                        <h2>{Profit(v)}%</h2>
+                                    </div>
+                                </div>}
                             <div className="data_block">
                                 <input type='search' placeholder="Enter ticker" />
                                 {stocks && (
                                     <Table color={color}>
-                                        <thead>                                  
-                                            <tr>
-                                                <th>Ticker</th>
-                                                <th>Date and time</th>                                                                                              
-                                                <th>Take profit</th>
-                                                <th>Stop loss</th> 
-                                            </tr>
-                                        </thead>                                               
+
+                                        <tr>
+                                            <th>Ticker</th>
+                                            <th>Date and time</th>
+                                            <th>Take profit</th>
+                                            <th>Stop loss</th>
+                                        </tr>
+
                                         <tbody>
-                                            {stocks.filter(d=>Date.parse(d.date) === maxDate).map((i,index) => (
+                                            {stocks.filter(d => Date.parse(d.date) === maxDate).map((i, index) => (
                                                 <tr key={index}>
                                                     <td className="ticker">
-                                                    <img src={`/static/logo_stocks/${i.name}.png`} height="30" width="30" />
+                                                        <img src={`/static/logo_stocks/${i.name}.png`} height="30" width="30" />
                                                         {i.name}
                                                     </td>
                                                     <td>{i.date}</td>

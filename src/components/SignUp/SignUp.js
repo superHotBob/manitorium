@@ -32,8 +32,7 @@ function SignUp({ onSignup, isLoading, apiError }) {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();  
-  useEffect(() => {
-   
+  useEffect(() => {   
       fetch(`${process.env.REACT_APP_URL}/auth/self`)
         .then(res => res.json())
         .then(res => {
@@ -50,6 +49,7 @@ function SignUp({ onSignup, isLoading, apiError }) {
    
    
   }, []);
+  
   const params = location.hash;
   const [message, setMessage] = useState(false);
 
