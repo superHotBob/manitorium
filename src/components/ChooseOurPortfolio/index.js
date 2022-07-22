@@ -353,7 +353,7 @@ export default function ChooseOurPortfolio() {
     //         .catch((err) => console.log(err.message));
     // }, []);
     const diagramLine = {
-        limit: 20,       
+        limit: 100,       
         order_by: "date",
         order_by_direction: "desc",
 
@@ -367,6 +367,8 @@ export default function ChooseOurPortfolio() {
                     setDataDiagram(response.historical_pnls.sort((a,b)=>
                     Number(a.date.replace(/-/g,'')) > Number(b.date.replace(/-/g,'')) ? 1 : -1));
                     console.log('data diagram', response.historical_pnls);
+                    setViewPortfolio('long_2');
+                    GetPortfolio('long_1')
                 } else {
                     // navigate('/')
                 }
@@ -395,7 +397,7 @@ export default function ChooseOurPortfolio() {
                     fill="#666"
 
                 >
-                    {payload.value ? payload.value.slice(5) : null}
+                    {payload.value ? payload.value : null}
                 </text>
             </g>
         );
@@ -536,14 +538,12 @@ export default function ChooseOurPortfolio() {
                                 <input type='search' placeholder="Enter ticker" />
                                 {stocks && (
                                     <Table color={color}>
-
                                         <tr>
                                             <th>Ticker</th>
                                             <th>Date and time</th>
                                             <th>Take profit</th>
                                             <th>Stop loss</th>
                                         </tr>
-
                                         <tbody>
                                             {stocks.filter(d => Date.parse(d.date) === maxDate).map((i, index) => (
                                                 <tr key={index}>
@@ -554,9 +554,7 @@ export default function ChooseOurPortfolio() {
                                                     <td>{i.date}</td>
                                                     <td>{i.take_profit}</td>
                                                     <td>{i.stop_loss}</td>
-
                                                 </tr>
-
                                             ))}
                                         </tbody>
                                     </Table>

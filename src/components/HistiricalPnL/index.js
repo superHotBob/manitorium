@@ -128,8 +128,12 @@ const historical_pnl = `${process.env.REACT_APP_URL}/data/historical-pnl-cumulat
 export default function HistoricalPnL() {
   const color = useSelector(new_color);
   const [dataTable, setDataTable] = useState();
+  const [dataDiagram, setDataDiagram] = useState();
+  
   const [nameCollumn, setNameCollumn] = useState();
   const [table_header, setTableHeader] = useState();
+
+ 
 
 
   const renderColorfulLegendText = (value, entry) => {
@@ -170,7 +174,7 @@ export default function HistoricalPnL() {
     </span>;
   };
   const diagramLine = {
-    limit: 20,
+    limit: 100,
     order_by: "date",
     order_by_direction: "desc",
 
@@ -182,7 +186,8 @@ export default function HistoricalPnL() {
       .then((response) => {
         if (response.success) {
           setDataTable(response.historical_pnls.sort((a, b) =>
-            Number(a.date.replace(/-/g, '')) > Number(b.date.replace(/-/g, '')) ? 1 : -1));
+          Number(a.date.replace(/-/g, '')) < Number(b.date.replace(/-/g, '')) ? 1 : -1));
+          setDataDiagram([...response.historical_pnls].reverse());  
           console.log('data diagram', response.historical_pnls);
           setNameCollumn(Object.keys(response.historical_pnls[0]));
           const table__header = Object.keys(response.historical_pnls[0]).map((i) => [
@@ -245,11 +250,14 @@ export default function HistoricalPnL() {
     [opacity, setOpacity]
   );
   const CustomTooltip = ({ active, payload, label }) => {
+    const view = Object.values(opacity);
+    let arr = [0,1,2,3,4,5,6];
     if (active && payload && payload.length) {
       return (
         <div style={{background:'#fff',padding: '5px', boxShadow: '0 0 15px 1px silver',borderRadius: 8, width: '150px'}}>
-          {[0,1,2,3,4,5,6].map(i=>
-            <p className="label"><b>{payload[i]['dataKey'].replace('_',' ').toUpperCase()}</b> : {payload[i].value.toFixed(0)}%</p>
+          <b>{label}</b>
+          {arr.map(i=>
+            <p style={{display: view[i] ? 'block' : 'none'}} className="label" key={i}><b>{payload[i]['dataKey'].replace('_',' ').toUpperCase()}</b> : {payload[i].value.toFixed(0)}%</p>
           )}
           
         </div>
@@ -268,7 +276,7 @@ export default function HistoricalPnL() {
             <LineChart
               width={widthBlock > 1250 ? 1250 : widthBlock / 1.05}
               height={widthBlock > 1250 ? 500 : heightBlock / 1.1}
-              data={dataTable}
+              data={dataDiagram}
               margin={{
                 top: 5,
                 right: 0,
@@ -281,13 +289,13 @@ export default function HistoricalPnL() {
               <YAxis axisLine={false} tickLine={false} />
               <Tooltip content={<CustomTooltip />}/>
               <Legend onClick={ShowLine} wrapperStyle={{ left: 0 }} verticalAlign="bottom" formatter={renderColorfulLegendText} chartWidth={250} iconSize={0} />
-              <Line dataKey="long_1" stroke="#1bcc6c" strokeOpacity={opacity.long_1} activeDot={{ r: 8 }} dot={false} />
-              <Line dataKey="long_2" stroke="#97e94e" strokeOpacity={opacity.long_2} activeDot={{ r: 8 }} dot={false} />
-              <Line dataKey="short_1" stroke="#ff6969" strokeOpacity={opacity.short_1} activeDot={{ r: 8 }} dot={false} />
-              <Line dataKey="short_2" stroke="#ff0808" strokeOpacity={opacity.short_2} activeDot={{ r: 8 }} dot={false} />
-              <Line dataKey="nasdaq" stroke="orange" strokeOpacity={opacity.nasdaq} activeDot={{ r: 8 }} dot={false} />
-              <Line dataKey="sp500" stroke="gray" strokeOpacity={opacity.sp500} activeDot={{ r: 8 }} dot={false} />
-              <Line dataKey="dgi" stroke="purple" strokeOpacity={opacity.dgi} activeDot={{ r: 8 }} dot={false} />
+              <Line dataKey="long_1" stroke="#1bcc6c" strokeOpacity={opacity.long_1} activeDot={{ r: opacity.long_1 ? 8 : 0 }} dot={false} />
+              <Line dataKey="long_2" stroke="#97e94e" strokeOpacity={opacity.long_2} activeDot={{r: opacity.long_2 ? 8 : 0 }} dot={false} />
+              <Line dataKey="short_1" stroke="#ff6969" strokeOpacity={opacity.short_1} activeDot={{ r: opacity.short_1 ? 8 : 0 }} dot={false} />
+              <Line dataKey="short_2" stroke="#ff0808" strokeOpacity={opacity.short_2} activeDot={{ r: opacity.short_2 ? 8 : 0 }} dot={false} />
+              <Line dataKey="nasdaq" stroke="orange" strokeOpacity={opacity.nasdaq} activeDot={{ r: opacity.nasdaq ? 8 : 0 }} dot={false} />
+              <Line dataKey="sp500" stroke="gray" strokeOpacity={opacity.sp500} activeDot={{ r: opacity.sp500 ? 8 : 0 }} dot={false} />
+              <Line dataKey="dgi" stroke="purple" strokeOpacity={opacity.dgi} activeDot={{ r: opacity.dgi ? 8 : 0 }} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </BlockDiagram>

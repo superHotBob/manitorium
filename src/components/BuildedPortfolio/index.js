@@ -170,7 +170,7 @@ const MainBlock = styled.div`
         .data_block {
             float: right;               
             margin-left: 0.1vw;
-            padding-right: 0;
+           
             &:before {
                 content: 'Portfolio assets'; 
                 display: block;                 
@@ -235,13 +235,13 @@ const MainBlock = styled.div`
     
 `;
 const Table = styled.table`
-  min-width: 99%; 
+  min-width: 100%; 
   text-align: left; 
   color: ${(props) => (props.color ? "#fff" : "#E5E1E6")};
   
   
    tbody {
-        height: 350px;
+        height: 345px;
         overflow-y: auto;    
         border-radius: 8px;
         border-top-left-radius: 0;
@@ -415,14 +415,19 @@ export default function ChooseOurPortfolio() {
             ['start', b],
             ['end', today]
         ];
-        a.map(i => i.ticker).forEach(element => {
-            paramsHistoricalPrice.unshift(['names', element]);
+        a.forEach(element => {
+            paramsHistoricalPrice.unshift(['names', element.ticker]);
         });
         fetch(`${historicalPrice}?` + new URLSearchParams(paramsHistoricalPrice))
             .then((res) => res.json())
-            .then(res => CreateDataDiagram(res.prices, a))
+            .then(res => res.prices.length ? CreateDataDiagram(res.prices, a) : SetTodayDate(b))
             .catch((err) => console.log(err.message));
 
+    };
+
+    function SetTodayDate(a) {
+        setDataDiagram([{date: a, profit: 0}]);
+        setProfit(0);
     };
 
     function CreateDataDiagram(a, b) {
@@ -443,6 +448,7 @@ export default function ChooseOurPortfolio() {
         let new_data_total = all_data_history.map(i => [{ date: i, profit: (ProfitDate(i) * 100).toFixed(0) }]).flat();
         const data = [...new_data_total];
         setDataDiagram(data);
+       
     };
     function Composition(a) {
         const new_stocks = stocks.map(i => i.price * i.number);
@@ -453,13 +459,13 @@ export default function ChooseOurPortfolio() {
         let my_price = stocks.filter(i => i.ticker === a ? i : null)[0].price;
         return (b * 100 / my_price).toFixed(0) - 100
     };
-    function Drawdown(a) {
+    function Drawdown(a,b) {
         let arr = history.filter(i => i.name === a ? i.name : null).map(i => i.low);
-        return Math.min.apply(null, arr);
+        return (100*Math.min.apply(null, arr)/b).toFixed(0);
     };
-    function ATH(a) {
+    function ATH(a,b) {
         let arr = history.filter(i => i.name === a ? i.name : null).map(i => i.high);
-        return Math.max.apply(null, arr);
+        return (100*Math.max.apply(null, arr)/b).toFixed(0);
     };
 
     function DeletePortfolio(a) {
@@ -525,7 +531,7 @@ export default function ChooseOurPortfolio() {
                                 {/* <button className="btn_sell_portfolio">Sell this Portfolio</button> */}
                             </p>
 
-                            {profit && <div className="image_block wrapp">
+                            {dataDiagram && <div className="image_block wrapp">
                                 <div className="image_block" style={{ width: "100%", height: 290 }}>
                                     <ResponsiveContainer>
                                         <LineChart
@@ -582,35 +588,50 @@ export default function ChooseOurPortfolio() {
                             </div>}
                             <div className="data_block">
                                 <input type='search' placeholder="Enter ticker for search" />
-                                {(history && stocks) && (
+                               
                                     <Table color={color}>
                                         <thead style={{background: color ? '#fff':'#000'}}>
                                             <tr style={{width: '97.5%',background: color ? '#fff':'#000'}}>
                                                 <th>Ticker</th>
-                                                <th>Date and time</th>
-                                                <th>Profit</th>
+                                                <th>Date</th>
+                                                <th>Buy price</th>
+                                                <th>Now price</th>                                                
                                                 <th>Drawdown</th>
                                                 <th>ATH</th>
-                                                <th>Buy price</th>
-                                                <th>Now price</th>
+                                                <th>Profit</th>
 
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        {history ? <tbody>
                                             {history.filter(i => i.date === last_date_history).map((i,index) => (
                                                 <tr>
                                                     <td>{i.name}</td>
                                                     <td>{i.date}</td>
+                                                    <th>${stocks[index]['price']}</th>
+                                                    <th>${i.close}</th>                                                    
+                                                    <td>{Drawdown(i.name,stocks[index]['price'])}%</td>
+                                                    <td>{ATH(i.name,stocks[index]['price'])}%</td>
                                                     <td>{Profit(i.name, i.close)}%</td>
-                                                    <td>{Drawdown(i.name)}</td>
-                                                    <td>{ATH(i.name)}</td>
-                                                    <th>{stocks[index]['price']}</th>
-                                                    <th>{i.close}</th>
                                                 </tr>
                                             ))}
                                         </tbody>
+                                        : stocks ?
+                                       <tbody>
+                                            {stocks.map((i,index) => (
+                                                <tr key={i.ticker}>
+                                                    <td>{i.ticker}</td>
+                                                    <td>{new Date().toISOString().slice(0, 10)}</td>
+                                                    <th>${i.price}</th>
+                                                    <th>${i.price}</th>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                   
+                                                </tr>
+                                            ))}
+                                        </tbody>: <tr>no data</tr>}
                                     </Table>
-                                )}
+                               
 
                             </div>
                         </div>

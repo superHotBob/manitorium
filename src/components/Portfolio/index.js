@@ -41,19 +41,15 @@ const Portfolio = styled.div`
           line-height: 30px;
           width: 80%;
           font-weight: 500;
-          display: block;
-          -webkit-border-radius: 20px;
-          -khtml-border-radius: 20px;
-          -moz-border-radius: 20px;
-          
+          display: block;          
           border-radius: 20px;
           border: 1px solid rgba(57, 255, 113, 1);
           color: rgba(57, 255, 113, 1);
           background: ${(props) => (props.color ? "#fff" : "#000")};
           margin: 15px auto;
           cursor: pointer;
-          font-size: 12px;
-          outline:${(props) => (props.color ? "#fff" : "#000")} 8px solid;
+          font-size: 12px;         
+          box-shadow: 0 0 0 8px ${(props) => (props.color ? "#fff" : "#000")};
           
           @media (max-width: 1200px) {        
             width: 47%;

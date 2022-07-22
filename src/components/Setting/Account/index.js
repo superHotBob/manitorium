@@ -16,18 +16,25 @@ const MainBlock = styled.div`
   background: ${(props) =>
     props.color ? "#fff" : "rgba(27, 27, 30, 1)"};
   color: ${(props) => (props.color ? "#000" : "#fff")};
+  @media (max-width: 800px) {
+      text-align: center;
+    }
  
   .btn_save {
     margin: 30px 0 0 40%;
     height: 46px;
-    width: 181px;
+    width: 200px;
     background: #A2A3FD;
     border: none;
     color: #fff;
     font-size: 18px;
     cursor: pointer;
     border-radius: 100px;
-    padding: 14px, 36px, 14px, 36px;
+    padding: 14px 36px;
+    @media (max-width: 1200px) {
+      margin: 30px auto;
+    }
+
 
   }  
   .btn_create_promo {
@@ -69,7 +76,11 @@ const MainBlock = styled.div`
       height: 200px;
     }
     .block__data{
-      width: 80%;
+      width: calc(100% - 200px - 5vw);
+      @media (max-width: 900px) {
+      margin-top: 30px;
+      width: 100%;
+    }
       label {
         font: 600 16px/16px 'Jost', sans-serif;
         width: 200px;
@@ -107,14 +118,16 @@ const MainBlock = styled.div`
       opacity:  1 ;
       
     }
-    }
+    
     @media (max-width: 1200px) {
       width: calc(100vw - 95px);
     }
     @media (max-width: 600px) {
       margin: 0 auto;
       width: 100%;
+      justify-content: center;
     }
+  }
 `;
 
 
@@ -190,7 +203,7 @@ export default function Setting() {
             <div className="block__image" >
               <img src={user_image} alt='ige' />
               <button>Change</button>
-            </div>
+            </div>            
             <div className="block__data">
               <label>
                 <span>Your full name</span>

@@ -71,7 +71,9 @@ const MainBlock = styled.div`
         props.color
             ? "#fff"
             : "rgba(27, 27, 30, 1)"};
- 
+     @media (max-width: 1200px) {
+    width: 100%;
+  }
   .admin_header {   
     padding: 0;
     margin: 0 0 20px 0;   
@@ -98,6 +100,10 @@ const MainBlock = styled.div`
       vertical-align: bottom;
       cursor: pointer;
     }
+    @media (max-width: 1200px) {
+        display: block;
+        font: 600 13px/16px 'Jost', sans-serif;
+    }
   }
     .download {
         float: right;
@@ -112,6 +118,9 @@ const MainBlock = styled.div`
         margin-bottom: 24px;
         text-decoration: none;
         text-align: center;
+        @media (max-width: 1200px) {
+            margin: 10px auto;
+        }
     }
 
   @media (max-width: 1200px) {
@@ -123,6 +132,7 @@ const MainBlock = styled.div`
   }
 `;
 const Table = styled.table` 
+  min-width: 1200px;
   width: 100%;
   margin-bottom: 20px;
   height: auto;
@@ -136,8 +146,7 @@ const Table = styled.table`
   
   padding: 12px;
   .table_header {     
-      position: sticky;
-      top: 0;
+     
       padding-right: 20px;
       background: ${(props) =>
         props.color
@@ -154,10 +163,6 @@ const Table = styled.table`
   td {
     font: 400 14px/14px "Jost", sans-serif;
     padding: 10px 0 10px 10px;
-    border-spacing: 0;
-   
-    box-sizing: border-box;
-   
     color: ${(props) => (props.color ? "#1B1B1E" : "#E5E1E6")};
   }
   
@@ -171,12 +176,12 @@ const Table = styled.table`
   tr {
    
     padding: 5px 0;
-    cursor: pointer; 
+    
   }
   tbody {
+    cursor: pointer; 
     tr:nth-child(odd) {
-        border-radius: 8px;   
-        padding: 5px 0;  
+        border-radius: 8px;         
         background: ${(props) =>
         props.color
             ? " #FFFBFF"
@@ -258,8 +263,7 @@ export default function ModeratorPage() {
         order_by: "email",
         order_by_direction: "asc"
     };
-    useEffect(() => { 
-       
+    useEffect(() => {       
         fetch(`${getcsv}`)       
         .then((response) => response.text())
         .then((response) => {
@@ -297,13 +301,13 @@ export default function ModeratorPage() {
           method: 'POST'      
         })
         .then(res => res.json())
-        .then(res => navigate('/moderatorpage'));
-      };
-      function CopyToClipboard() {
+        .then(res => setPromo(res.promo_code));
+    };
+    function CopyToClipboard() {
         const ref_link = `${window.location.origin}/signup/#${promo}`;
         navigator.clipboard.writeText(ref_link);
         alert("Code copied: " + ref_link);
-      }
+    }
     function Verifield(a) {
         fetch(`${baseURL + '/' + a}`,
             {
@@ -357,24 +361,27 @@ export default function ModeratorPage() {
                     <span>Subscriptions</span>
                 </p>
                 <h2>Referal link</h2>
-                <div>
-                {promo ?       
-                    <span className="ref_link">{
-                      
-                        `${window.location.origin}/signup/#${promo}` 
-                    } <img src={copy_ref} alt='copy' title='copy to clipboard' onClick={CopyToClipboard}/></span>
-                    :
-                    <button onClick={CreateReferal} className="btn_create_promo">+ Create Referal code</button>
-        
-                }
+                <div style={{wordBreak:'break-all'}}>
+                    {promo ?       
+                        <span className="ref_link">{
+                        
+                            `${window.location.origin}/signup/#${promo}` 
+                        } <img src={copy_ref} alt='copy' title='copy to clipboard' onClick={CopyToClipboard}/></span>
+                        :
+                        <button onClick={CreateReferal} className="btn_create_promo">+ Create Referal code</button>
+            
+                    }
                     <CSVLink
                         data={dataCSV}
-                        filename={"my-file.csv"}
-                       
+                        filename={"my-file.csv"}                       
                         target="_blank"
-                     className="download">Create csv <img src={download} /></CSVLink></div>
-                <Table color={color}>
-                   
+                        className="download"
+                    >
+                        Create csv <img src={download} /> 
+                    </CSVLink>
+                </div>
+                <div style={{width: '100%',overflow: 'auto'}}>
+                <Table color={color}>                   
                         <tr>
                             <td>Name Surname</td>
                             <td>Email</td>
@@ -382,8 +389,7 @@ export default function ModeratorPage() {
                             <td>Who invited</td>
                             <td>Partner</td>
                             <td>Status</td>
-                        </tr>
-                   
+                        </tr>                   
                     {users && <tbody>
                         {users.map((i) => (
                             <tr onClick={() => ViewUser(i.email)} key={i.email}>
@@ -401,6 +407,7 @@ export default function ModeratorPage() {
                         ))}
                     </tbody>}
                 </Table>
+                </div>
                 {viewUser && <div className="modal__user">
                     <div className="user__profile">
                         <img src={close} alt='close' onClick={() => setViewUser()} />

@@ -368,13 +368,13 @@ export default function MainTable({
                 {data.map((i) => (
                   <div className="data_row" key={i.name}>
                     <div  className="ticker" style={{width: '120%'}} >
-                    <img src={`/static/logo_stocks/${i.name}.png`} height="30" width="30" alt={i.name}/>
+                    <img src={`https://manitorium.com/static/logo_stocks/${i.name}.png`} height="30" width="30" alt='name'/>
                       {i.name}
                       </div>
                     <div>{i.sector}</div>
                     <div>{i.industry}</div>
                     <div style={{ width: '150%'}}>{(new Intl.NumberFormat('en-US').format(i.market_cap)).replace(/,/g,"'")}</div>
-                    <div className="two">{i.tech_rating ? i.tech_rating.replace('_', ' ') :''}</div>
+                    <div >{i.tech_rating ? i.tech_rating.replace('_', ' ') :''}</div>
                     <div className="two">{i.fundamentals_total_place}</div>
                     <div className="two">{i.gradient ? i.gradient.toFixed(5) : ''}</div>    
                     <div className="two">{i.recommendation_value}</div>

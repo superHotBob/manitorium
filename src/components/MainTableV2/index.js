@@ -356,7 +356,7 @@ export default function MainTableV2({
                   <div className="data_row" key={i.name}>
                     <div className="one first" style={{ width: '80%' }}>{i.place}</div>
                     <div className="one first ticker" style={{ width: '120%'}}>
-                    <img src={`/static/logo_stocks/${i.name}.png`} height="30" width="30" alt={i.name} />
+                    <img src={`https://manitorium.com/static/logo_stocks/${i.name}.png`} height="30" width="30" alt={i.name} />
                       {i.name}
                       </div>
                     <div className="two" style={{ width: '150%' }}>{i.sector}</div>

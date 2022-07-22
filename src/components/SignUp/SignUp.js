@@ -49,7 +49,7 @@ function SignUp({ onSignup, isLoading, apiError }) {
    
    
   }, []);
-  
+
   const params = location.hash;
   const [message, setMessage] = useState(false);
 
@@ -275,6 +275,7 @@ function SignUp({ onSignup, isLoading, apiError }) {
           >
             {errors.agreement || ""}
           </span>
+          <br/>
           <Checkbox
             name="agreement"
             onCheckBoxClick={handleCheckbox}
@@ -284,9 +285,10 @@ function SignUp({ onSignup, isLoading, apiError }) {
             redirectText="Terms & Conditions"
             redirectLink="/#"
           />
+          <br/>
         </label>
 
-        <label className="auth__label" htmlFor="referral">
+        {/* <label className="auth__label" htmlFor="referral">
           <div className="auth__input-icon-box auth__input-icon-box_type_referral">
             {isInputValid.referral &&
               values.referral !== "" &&
@@ -308,7 +310,7 @@ function SignUp({ onSignup, isLoading, apiError }) {
             // value={values.referral || ""}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
       </AuthPage>
     </section>
     
