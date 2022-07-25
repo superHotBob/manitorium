@@ -38,7 +38,7 @@ const TableOne = styled.table`
   box-shadow: none; 
   margin-bottom: 20px;
   border-collapse: collapse;
-  text-align: left;
+  text-align: center;
   background: ${(props) =>
     props.color
       ? " #fff"
@@ -142,7 +142,7 @@ export default function TableSemanticStockNews() {
   function my_time(a) {
 
     return ((new Date(time - a * 86400000)).getFullYear() +
-      ' - ' + ((new Date(time - a * 86400000)).getMonth() + 1) +
+      ' - ' + ((new Date(time - a * 86400000)).getMonth() > 9 ? ((new Date(time - a * 86400000)).getMonth() + 1) : '0' + ((new Date(time - a * 86400000)).getMonth() + 1)) +
       ' - ' + (new Date(time - a * 86400000)).getDate())
   };
 

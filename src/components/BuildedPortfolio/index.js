@@ -285,7 +285,7 @@ const Table = styled.table`
   tr {
     display: flex;
     justify-content: space-around;
-    padding: 5px 0 5px 5px; 
+    padding: 5px; 
   }
 
   
@@ -360,10 +360,11 @@ export default function ChooseOurPortfolio() {
     const [profit, setProfit] = useState();
     const [error, setError] = useState(null);
 
+    const [endProfit, setEndProfit] = useState([]);
+
 
     const paramstwo = {
-        limit: 100,
-        // offset: 1,
+        limit: 100,       
         order_by: "type",
         order_by_direction: "asc",
 
@@ -396,7 +397,7 @@ export default function ChooseOurPortfolio() {
             fetch(`${portfolio}/${a}`)
                 .then((res) => res.json())
                 .then((res) => {
-                    setStocks(res.stocks);
+                    setStocks(res.stocks.sort((a,b)=>a.ticker > b.ticker ? 1: -1));
                     console.log('This is stocks',res.stocks)
                     if (res.success) {
                         GetHistirical(res.stocks,b);
@@ -426,27 +427,37 @@ export default function ChooseOurPortfolio() {
     };
 
     function SetTodayDate(a) {
+       
         setDataDiagram([{date: a, profit: 0}]);
         setProfit(0);
     };
 
-    function CreateDataDiagram(a, b) {
+    function CreateDataDiagram(a, z) {
         setHistory(a);
+        setProfit(0);
         let all_data_history = [...new Set(a.map(i => i.date))];
         const last_date = all_data_history[all_data_history.length - 1];
         setLastDateHistory(last_date);
-        const new_portfolio_close = a.filter(i => i.date === last_date ? i : null).map(i => i.close);
+        // const new_portfolio_close = a.filter(i => i.date === last_date ? i : null).map(i => i.close);
         // const cost_portfolio_new = new_portfolio_close.reduce((partialSum, a) => partialSum + a, 0);
-        const cost_portfolio = b.map(i => i.price).reduce((partialSum, a) => partialSum + a, 0);
-        console.log('Cost portfolio', stocks)
+       
+        const cost_portfolio = z.map(i => i.price).reduce((partialSum, a) => partialSum + a, 0);
+        const s = a.filter(i=>i.date === last_date).map((i,index)=>(100* i.close/z[index].price) - 100).reduce((partialSum, a) => partialSum + a, 0)/a.filter(i=>i.date === last_date).length;
+       
+        setProfit(s);
         function ProfitDate(b) {
-            const my_portfolio_close = a.filter(i => i.date === b ? i : null).map(i => i.close);
-            const cost_portfolio_new = my_portfolio_close.reduce((partialSum, a) => partialSum + a, 0);
-            setProfit((cost_portfolio_new / cost_portfolio) * 100);
-            return cost_portfolio_new / cost_portfolio;
+            // const my_portfolio_close = a.filter(i => i.date === b ? i : null).map(i => i.close);
+            // const cost_portfolio_new = my_portfolio_close.reduce((partialSum, a) => partialSum + a, 0);
+            const s = a.filter(i => i.date === b)
+            .map((i,index)=>(100* i.close/z[index].price) - 100)
+            .reduce((partialSum, a) => partialSum + a, 0)/a.filter(i=>i.date === last_date).length;
+
+          
+            return s;
         };
-        let new_data_total = all_data_history.map(i => [{ date: i, profit: (ProfitDate(i) * 100).toFixed(0) }]).flat();
+        let new_data_total = all_data_history.map(i => [{ date: i, profit: ProfitDate(i).toFixed(1) }]).flat();
         const data = [...new_data_total];
+       
         setDataDiagram(data);
        
     };
@@ -457,15 +468,17 @@ export default function ChooseOurPortfolio() {
     };
     function Profit(a, b) {
         let my_price = stocks.filter(i => i.ticker === a ? i : null)[0].price;
-        return (b * 100 / my_price).toFixed(0) - 100
+        const prof = (b * 100 / my_price).toFixed(0) - 100 ;
+       
+        return prof;
     };
     function Drawdown(a,b) {
         let arr = history.filter(i => i.name === a ? i.name : null).map(i => i.low);
-        return (100*Math.min.apply(null, arr)/b).toFixed(0);
+        return (Math.min.apply(null, arr)/b).toFixed(2);
     };
     function ATH(a,b) {
         let arr = history.filter(i => i.name === a ? i.name : null).map(i => i.high);
-        return (100*Math.max.apply(null, arr)/b).toFixed(0);
+        return (Math.max.apply(null, arr)/b).toFixed(2);
     };
 
     function DeletePortfolio(a) {
@@ -603,12 +616,12 @@ export default function ChooseOurPortfolio() {
                                             </tr>
                                         </thead>
                                         {history ? <tbody>
-                                            {history.filter(i => i.date === last_date_history).map((i,index) => (
+                                            {history.sort((a,b)=>a.name > b.name ? 1: -1).filter(i => i.date === last_date_history).map((i,index) => (
                                                 <tr>
                                                     <td>{i.name}</td>
                                                     <td>{i.date}</td>
                                                     <th>${stocks[index]['price']}</th>
-                                                    <th>${i.close}</th>                                                    
+                                                    <th>${i.close.toFixed(2)}</th>                                                    
                                                     <td>{Drawdown(i.name,stocks[index]['price'])}%</td>
                                                     <td>{ATH(i.name,stocks[index]['price'])}%</td>
                                                     <td>{Profit(i.name, i.close)}%</td>

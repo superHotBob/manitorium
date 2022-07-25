@@ -7,7 +7,6 @@ import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import ScrollToTop from "./ScrollToTop";
 import store from "./store";
-import { Helmet } from "react-helmet";
 
 ReactDOM.render(
   <React.StrictMode>  

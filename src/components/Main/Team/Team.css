@@ -18,7 +18,7 @@
 }
 
 .team__list {
-  max-width: 1070px;
+  max-width: 1352px;
   display: grid;
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   justify-content: space-between;
@@ -30,7 +30,7 @@
 
 .team__item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   transition: transform 0.2s ease;
 }
 
@@ -50,8 +50,8 @@
   background: #e1e0ff;
   border-radius: 50%;
   position: absolute;
-  left: 0px;
-  top: 0px;
+  
+  top: 7px;
   z-index: -1;
 }
 
@@ -98,6 +98,7 @@
   color: #ffffff;
   margin: 0;
   padding-top: 32px;
+  white-space: pre-line;
 }
 
 @media (max-width: 1280px) {

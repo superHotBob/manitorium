@@ -203,8 +203,7 @@ function App() {
   };
 
   return (
-    <div className="app">
-      {/* <Header /> */}
+    <div className="app">      
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/StocksPortfolioBuilder" element={<Bilder />} />
@@ -262,8 +261,7 @@ function App() {
             />
           }
         />
-      </Routes>
-      {/* <Footer />      */}
+      </Routes>     
       <Footer />
     </div>
   );
