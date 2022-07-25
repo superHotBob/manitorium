@@ -565,7 +565,7 @@ export default function ChooseOurPortfolio() {
                                                 axisLine={false}
                                                 tick={<CustomizedAxisTick />}
                                             />
-                                            <YAxis tickLine={false} axisLine={false} domain={['dataMin-10', 'dataMax +10']} />
+                                            <YAxis tickLine={false} axisLine={false} domain={['dataMin-2', 'dataMax + 2']} />
                                             <Tooltip
                                                 content={<CustomTooltip />}
                                                 coordinate={{ x: -100, y: -100 }}
